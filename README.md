@@ -17,8 +17,8 @@ A powerful Python library that leverages Gemini's advanced multimodal capabiliti
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/pdftomd.git
-cd pdftomd
+git clone https://github.com/JoaquinMulet/pdftomd_w_gemini.git
+cd pdftomd_w_gemini
 
 # Create virtual environment
 uv venv .venv

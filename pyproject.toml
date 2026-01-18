@@ -38,9 +38,9 @@ dev = [
 pdftomd = "pdftomd.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/pdftomd"
-Documentation = "https://github.com/yourusername/pdftomd#readme"
-Repository = "https://github.com/yourusername/pdftomd"
+Homepage = "https://github.com/JoaquinMulet/pdftomd_w_gemini"
+Documentation = "https://github.com/JoaquinMulet/pdftomd_w_gemini#readme"
+Repository = "https://github.com/JoaquinMulet/pdftomd_w_gemini"
 
 [tool.setuptools.packages.find]
 where = ["."]
