@@ -181,3 +181,38 @@ class ExtractedDocument(BaseModel):
         default=None,
         description="Key terms and definitions if present"
     )
+
+
+class TokenUsage(BaseModel):
+    """Token usage statistics from the API call for cost analysis."""
+    
+    prompt_tokens: int = Field(
+        description="Number of tokens in the input prompt (includes PDF content)"
+    )
+    completion_tokens: int = Field(
+        description="Number of tokens in the generated response"
+    )
+    total_tokens: int = Field(
+        description="Total tokens used (prompt + completion)"
+    )
+    
+    def __str__(self) -> str:
+        return f"In: {self.prompt_tokens:,} | Out: {self.completion_tokens:,} | Total: {self.total_tokens:,}"
+
+
+class ExtractionResult(BaseModel):
+    """Complete extraction result including document and usage statistics."""
+    
+    document: ExtractedDocument = Field(
+        description="The extracted document content"
+    )
+    token_usage: TokenUsage = Field(
+        description="Token usage statistics for cost analysis"
+    )
+    finish_reason: str = Field(
+        description="API finish reason (STOP, MAX_TOKENS, etc.)"
+    )
+    was_truncated: bool = Field(
+        default=False,
+        description="Whether the response was truncated due to token limits"
+    )

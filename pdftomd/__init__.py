@@ -12,9 +12,11 @@ from pdftomd.models import (
     Section,
     Table,
     Image,
+    TokenUsage,
+    ExtractionResult,
 )
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __all__ = [
     "PDFExtractor",
     "ExtractedDocument",
@@ -22,4 +24,6 @@ __all__ = [
     "Section",
     "Table",
     "Image",
+    "TokenUsage",
+    "ExtractionResult",
 ]

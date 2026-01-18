@@ -114,11 +114,16 @@ Environment:
             use_url_context=args.url_context,
         )
         
-        # Extract content
-        document = extractor.extract(args.input)
+        # Extract content with token tracking
+        result = extractor.extract_with_stats(args.input)
+        document = result.document
         
         print(f"[OK] Extracted {len(document.sections)} sections")
         print(f"[OK] Found {len(document.tables)} tables, {len(document.images)} images")
+        
+        # Show truncation warning if applicable
+        if result.was_truncated:
+            print(f"[WARN] Response was truncated (finish_reason: {result.finish_reason})")
         
         # Write output
         if args.json:
@@ -129,6 +134,10 @@ Environment:
         args.output.write_text(output_content, encoding="utf-8")
         
         print(f"[DONE] Saved to: {args.output}")
+        
+        # Always show token usage for cost analysis
+        tokens = result.token_usage
+        print(f"[TOKENS] Input: {tokens.prompt_tokens:,} | Output: {tokens.completion_tokens:,} | Total: {tokens.total_tokens:,}")
         
     except ValueError as e:
         print(f"[ERROR] Configuration error: {e}", file=sys.stderr)

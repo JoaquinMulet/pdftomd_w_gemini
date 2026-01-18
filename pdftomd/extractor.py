@@ -15,7 +15,7 @@ from google import genai
 from google.genai import types
 from dotenv import load_dotenv
 
-from pdftomd.models import ExtractedDocument
+from pdftomd.models import ExtractedDocument, TokenUsage, ExtractionResult
 
 
 # Configure logging
@@ -272,6 +272,15 @@ ADDITIONAL CONTEXT:
                 response_len = len(response.text)
                 logger.info(f"Response size: {response_len:,} characters")
                 
+                # Log token usage for cost analysis
+                if response.usage_metadata:
+                    usage = response.usage_metadata
+                    logger.info(
+                        f"Tokens - In: {usage.prompt_token_count:,} | "
+                        f"Out: {usage.candidates_token_count:,} | "
+                        f"Total: {usage.total_token_count:,}"
+                    )
+                
                 # Parse and validate the response
                 document = ExtractedDocument.model_validate_json(response.text)
                 
@@ -283,6 +292,109 @@ ADDITIONAL CONTEXT:
                 )
                 
                 return document
+                
+            except Exception as e:
+                last_error = e
+                logger.warning(f"Attempt {attempt + 1} failed: {e}")
+                if attempt == max_retries - 1:
+                    logger.error(f"Extraction failed after {max_retries} attempts: {e}")
+                    raise
+    
+    def extract_with_stats(
+        self,
+        pdf_path: Union[str, Path],
+        include_web_context: bool = False,
+        max_retries: int = 3,
+    ) -> ExtractionResult:
+        """
+        Extract content from a PDF document with token usage statistics.
+        
+        This method is useful for cost analysis and monitoring API usage.
+        
+        Args:
+            pdf_path: Path to the PDF file.
+            include_web_context: If True and search is enabled, adds web context.
+            max_retries: Maximum number of retry attempts on failure.
+            
+        Returns:
+            ExtractionResult with document, token usage, and metadata.
+        """
+        import time
+        
+        pdf_part = self._load_pdf(pdf_path)
+        prompt = self._build_extraction_prompt(
+            include_web_context=include_web_context and self.use_search
+        )
+        
+        logger.info(f"Sending PDF to {self.model} for extraction...")
+        
+        config = {
+            "response_mime_type": "application/json",
+            "response_schema": ExtractedDocument,
+            "temperature": self.temperature,
+            "max_output_tokens": 65536,
+        }
+        
+        tools = self._build_tools_config()
+        if tools:
+            config["tools"] = tools
+        
+        last_error = None
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    wait_time = 2 ** attempt
+                    logger.info(f"Retry attempt {attempt + 1}/{max_retries} after {wait_time}s...")
+                    time.sleep(wait_time)
+                
+                response = self.client.models.generate_content(
+                    model=self.model,
+                    contents=[pdf_part, prompt],
+                    config=config,
+                )
+                
+                # Get finish reason
+                finish_reason = "UNKNOWN"
+                was_truncated = False
+                if response.candidates and len(response.candidates) > 0:
+                    finish_reason = str(response.candidates[0].finish_reason or "STOP")
+                    was_truncated = finish_reason == "MAX_TOKENS"
+                    if was_truncated:
+                        logger.warning("Response was TRUNCATED due to max_output_tokens limit!")
+                
+                if response.text is None:
+                    raise ValueError(f"API returned empty response. Finish reason: {finish_reason}")
+                
+                # Get token usage
+                token_usage = TokenUsage(
+                    prompt_tokens=0,
+                    completion_tokens=0,
+                    total_tokens=0,
+                )
+                if response.usage_metadata:
+                    usage = response.usage_metadata
+                    token_usage = TokenUsage(
+                        prompt_tokens=usage.prompt_token_count or 0,
+                        completion_tokens=usage.candidates_token_count or 0,
+                        total_tokens=usage.total_token_count or 0,
+                    )
+                    logger.info(f"Tokens - {token_usage}")
+                
+                # Parse document
+                document = ExtractedDocument.model_validate_json(response.text)
+                
+                logger.info(
+                    f"Extracted: {len(document.sections)} sections, "
+                    f"{len(document.tables)} tables, "
+                    f"{len(document.images)} images"
+                )
+                
+                return ExtractionResult(
+                    document=document,
+                    token_usage=token_usage,
+                    finish_reason=finish_reason,
+                    was_truncated=was_truncated,
+                )
                 
             except Exception as e:
                 last_error = e
