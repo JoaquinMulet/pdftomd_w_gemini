@@ -48,7 +48,6 @@ class PDFExtractor:
     MODELS = {
         "flash-preview": "gemini-3-flash-preview",  # Fast, feature-rich
         "pro-preview": "gemini-3-pro-preview",      # More capable, tools
-        "flash-stable": "gemini-2.0-flash",         # Production stable
     }
     
     def __init__(

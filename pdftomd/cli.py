@@ -45,7 +45,7 @@ Environment:
         "-m", "--model",
         type=str,
         default="gemini-3-flash-preview",
-        choices=["gemini-3-flash-preview", "gemini-3-pro-preview", "gemini-2.0-flash"],
+        choices=["gemini-3-flash-preview", "gemini-3-pro-preview"],
         help="Gemini model to use (default: gemini-3-flash-preview)"
     )
     

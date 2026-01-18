@@ -152,7 +152,6 @@ The library extracts the following elements:
 |-------|-------------|
 | `gemini-3-flash-preview` | **Default**. Fast, feature-rich, best for most uses |
 | `gemini-3-pro-preview` | More capable, better for complex documents |
-| `gemini-2.0-flash` | Production stable, fallback option |
 
 ## Configuration Options
 
