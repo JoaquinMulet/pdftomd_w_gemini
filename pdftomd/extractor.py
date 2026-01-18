@@ -199,6 +199,355 @@ ADDITIONAL CONTEXT:
             mime_type="application/pdf",
         )
     
+    # ===========================================
+    # Context Caching Methods for Large Documents
+    # ===========================================
+    
+    def _upload_to_file_api(self, pdf_path: Union[str, Path]) -> str:
+        """
+        Upload a PDF to Gemini's File API.
+        
+        Returns:
+            The file URI for use in caching.
+        """
+        pdf_path = Path(pdf_path)
+        logger.info(f"Uploading {pdf_path.name} to File API...")
+        
+        file = self.client.files.upload(file=str(pdf_path))
+        
+        logger.info(f"Uploaded: {file.name} (URI: {file.uri})")
+        return file.uri
+    
+    def _create_cache(self, file_uri: str, cache_ttl: str = "3600s"):
+        """
+        Create a cache with the uploaded PDF for multiple queries.
+        
+        Args:
+            file_uri: URI from File API upload.
+            cache_ttl: Time-to-live for cache (e.g., "3600s" = 1 hour).
+            
+        Returns:
+            The cached content object.
+        """
+        logger.info(f"Creating cache with TTL={cache_ttl}...")
+        
+        cached_content = self.client.caches.create(
+            model=self.model,
+            config=types.CreateCachedContentConfig(
+                contents=[
+                    types.Content(
+                        role="user",
+                        parts=[
+                            types.Part.from_uri(
+                                file_uri=file_uri,
+                                mime_type="application/pdf"
+                            )
+                        ]
+                    )
+                ],
+                system_instruction="You are an expert document analyzer. Extract information accurately and completely.",
+                display_name="PDF Extraction Cache",
+                ttl=cache_ttl
+            )
+        )
+        
+        logger.info(f"Cache created: {cached_content.name}")
+        return cached_content
+    
+    def _query_cached(self, prompt: str, cached_content, response_schema=None, max_retries: int = 3) -> dict:
+        """
+        Make a query against cached content with retry logic.
+        
+        Args:
+            prompt: The extraction prompt.
+            cached_content: The cache object.
+            response_schema: Optional Pydantic model for structured output.
+            max_retries: Maximum retry attempts.
+            
+        Returns:
+            Dict with response text, token usage, and finish reason.
+        """
+        import time
+        
+        config = {
+            "cached_content": cached_content.name,
+            "temperature": self.temperature,
+            "max_output_tokens": 65536,
+        }
+        
+        if response_schema:
+            config["response_mime_type"] = "application/json"
+            config["response_schema"] = response_schema
+        
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    wait_time = 2 ** attempt
+                    logger.info(f"  Retry {attempt + 1}/{max_retries} after {wait_time}s...")
+                    time.sleep(wait_time)
+                
+                response = self.client.models.generate_content(
+                    model=self.model,
+                    contents=prompt,
+                    config=config,
+                )
+                
+                # Check finish reason
+                finish_reason = "UNKNOWN"
+                if response.candidates and len(response.candidates) > 0:
+                    finish_reason = str(response.candidates[0].finish_reason or "STOP")
+                    
+                    # Handle RECITATION - retry
+                    if "RECITATION" in finish_reason:
+                        logger.warning(f"  RECITATION detected, retrying...")
+                        continue
+                    
+                    # Handle SAFETY - retry
+                    if "SAFETY" in finish_reason:
+                        logger.warning(f"  SAFETY filter triggered, retrying...")
+                        continue
+                
+                # Check for empty response
+                if response.text is None or response.text.strip() == "":
+                    if attempt < max_retries - 1:
+                        logger.warning(f"  Empty response, retrying...")
+                        continue
+                    else:
+                        logger.warning(f"  Empty response after {max_retries} attempts")
+                
+                # Get token usage
+                token_usage = {"prompt": 0, "completion": 0, "total": 0, "cached": 0}
+                if response.usage_metadata:
+                    usage = response.usage_metadata
+                    token_usage = {
+                        "prompt": usage.prompt_token_count or 0,
+                        "completion": usage.candidates_token_count or 0,
+                        "total": usage.total_token_count or 0,
+                        "cached": getattr(usage, 'cached_content_token_count', 0) or 0,
+                    }
+                
+                return {
+                    "text": response.text or "",
+                    "token_usage": token_usage,
+                    "finish_reason": finish_reason,
+                }
+                
+            except Exception as e:
+                logger.warning(f"  Query attempt {attempt + 1} failed: {e}")
+                if attempt == max_retries - 1:
+                    raise
+        
+        # Fallback - should not reach here
+        return {"text": "", "token_usage": {"prompt": 0, "completion": 0, "total": 0, "cached": 0}, "finish_reason": "FAILED"}
+    
+    def extract_large_document(
+        self,
+        pdf_path: Union[str, Path],
+        cache_ttl: str = "3600s",
+    ) -> ExtractionResult:
+        """
+        Extract content from a large PDF using Intelligent Context-Aware Chunking.
+        
+        This method uses a 3-phase approach:
+        1. STRUCTURAL ANALYSIS: Analyze document structure and get chunking suggestions
+        2. CONTEXT-AWARE EXTRACTION: Extract each chunk with global context
+        3. INTELLIGENT ASSEMBLY: Combine chunks maintaining coherence
+        
+        Args:
+            pdf_path: Path to the PDF file.
+            cache_ttl: Cache time-to-live (default: 1 hour).
+            
+        Returns:
+            ExtractionResult with document and combined token usage.
+        """
+        from pdftomd.models import (
+            DocumentMetadata, Section, Table, Image,
+            CodeBlock, Equation, Reference, DocumentAnalysis
+        )
+        import json
+        
+        pdf_path = Path(pdf_path)
+        logger.info(f"[LARGE DOC] Starting intelligent extraction for: {pdf_path.name}")
+        
+        # Step 1: Upload to File API
+        file_uri = self._upload_to_file_api(pdf_path)
+        
+        # Step 2: Create cache
+        cached_content = self._create_cache(file_uri, cache_ttl)
+        
+        total_tokens = TokenUsage(prompt_tokens=0, completion_tokens=0, total_tokens=0)
+        
+        # ========================================
+        # PHASE 1: STRUCTURAL ANALYSIS
+        # ========================================
+        logger.info("[PHASE 1] Analyzing document structure...")
+        
+        analysis_result = self._query_cached(
+            """Analyze this document and return a JSON object for chunked extraction.
+
+Return this exact JSON structure (fill in the values):
+{
+    "title": "The document title",
+    "document_type": "textbook chapter",
+    "total_pages": 20,
+    "language": "English",
+    "sections_outline": ["Section 1 Title", "Section 2 Title", "Section 3 Title"],
+    "global_context": "A summary paragraph describing the document purpose and main topics.",
+    "suggested_chunks": [
+        {"chunk_id": "chunk_1", "start_page": 1, "end_page": 7, "content_type": "introduction", "section_titles": ["Section 1"], "has_tables": false, "has_figures": false, "has_equations": false, "has_code": false},
+        {"chunk_id": "chunk_2", "start_page": 8, "end_page": 15, "content_type": "main_content", "section_titles": ["Section 2"], "has_tables": true, "has_figures": true, "has_equations": false, "has_code": false},
+        {"chunk_id": "chunk_3", "start_page": 16, "end_page": 20, "content_type": "conclusion", "section_titles": ["Section 3"], "has_tables": false, "has_figures": false, "has_equations": false, "has_code": false}
+    ]
+}
+
+Create 2-5 chunks covering all pages. Each chunk should cover logically related sections.""",
+            cached_content
+        )
+        
+        total_tokens.prompt_tokens += analysis_result["token_usage"]["prompt"]
+        total_tokens.completion_tokens += analysis_result["token_usage"]["completion"]
+        logger.info(f"  Tokens: {analysis_result['token_usage']}")
+        
+        # Parse analysis
+        try:
+            analysis_raw = json.loads(analysis_result["text"])
+            analysis = DocumentAnalysis.model_validate(analysis_raw)
+        except (json.JSONDecodeError, Exception) as e:
+            logger.error(f"Failed to parse structural analysis: {e}")
+            raise ValueError(f"Structural analysis failed: {e}")
+        
+        logger.info(f"  Document: {analysis.title}")
+        logger.info(f"  Type: {analysis.document_type}, Pages: {analysis.total_pages}")
+        logger.info(f"  Chunks suggested: {len(analysis.suggested_chunks)}")
+        
+        # ========================================
+        # PHASE 2: CONTEXT-AWARE CHUNK EXTRACTION
+        # ========================================
+        all_sections = []
+        all_tables = []
+        all_images = []
+        all_code_blocks = []
+        all_equations = []
+        all_references = []
+        
+        for i, chunk in enumerate(analysis.suggested_chunks):
+            logger.info(f"[PHASE 2] Extracting chunk {i+1}/{len(analysis.suggested_chunks)}: {chunk.chunk_id}")
+            logger.info(f"  Pages {chunk.start_page}-{chunk.end_page}: {chunk.content_type}")
+            logger.info(f"  Sections: {', '.join(chunk.section_titles[:3])}...")
+            
+            # Build context-aware prompt
+            chunk_prompt = f"""DOCUMENT GLOBAL CONTEXT:
+{analysis.global_context}
+
+FULL DOCUMENT STRUCTURE:
+{chr(10).join(analysis.sections_outline)}
+
+YOUR TASK:
+Extract ALL content from pages {chunk.start_page} to {chunk.end_page}.
+This chunk covers: {', '.join(chunk.section_titles)}
+Content type: {chunk.content_type}
+
+Extract and return as JSON:
+{{
+    "sections": [
+        {{"title": "Section Title", "level": 1-6, "content": "Complete markdown text..."}}
+    ],
+    "tables": [
+        {{"caption": "Table caption", "headers": ["Col1", "Col2"], "rows": [["data", "data"]], "context": "What this table shows"}}
+    ],
+    "images": [
+        {{"figure_number": "Figure 1", "caption": "Caption", "description": "Detailed description", "alt_text": "Alt text"}}
+    ],
+    "code_blocks": [
+        {{"language": "python", "code": "code here", "context": "What this code does"}}
+    ],
+    "equations": [
+        {{"equation_number": "Eq. 1", "latex": "LaTeX formula", "description": "What this equation represents"}}
+    ],
+    "references": [
+        {{"number": "1", "citation": "Full citation text"}}
+    ]
+}}
+
+IMPORTANT:
+- Extract COMPLETE text for each section, not summaries
+- Preserve all formatting (headers, lists, emphasis)
+- Include ALL tables, figures, equations in this page range
+- If an element type doesn't exist in these pages, return empty array"""
+            
+            chunk_result = self._query_cached(chunk_prompt, cached_content)
+            
+            total_tokens.prompt_tokens += chunk_result["token_usage"]["prompt"]
+            total_tokens.completion_tokens += chunk_result["token_usage"]["completion"]
+            logger.info(f"  Tokens: {chunk_result['token_usage']}")
+            
+            # Parse chunk results
+            try:
+                if chunk_result["text"]:
+                    chunk_data = json.loads(chunk_result["text"])
+                    
+                    # Accumulate results
+                    for s in chunk_data.get("sections", []):
+                        all_sections.append(Section(**s))
+                    for t in chunk_data.get("tables", []):
+                        all_tables.append(Table(**t))
+                    for img in chunk_data.get("images", []):
+                        all_images.append(Image(**img))
+                    for c in chunk_data.get("code_blocks", []):
+                        all_code_blocks.append(CodeBlock(**c))
+                    for eq in chunk_data.get("equations", []):
+                        all_equations.append(Equation(**eq))
+                    for ref in chunk_data.get("references", []):
+                        all_references.append(Reference(**ref))
+                    
+                    logger.info(f"  Extracted: {len(chunk_data.get('sections', []))} sections")
+            except (json.JSONDecodeError, Exception) as e:
+                logger.warning(f"  Failed to parse chunk {chunk.chunk_id}: {e}")
+                # Continue with other chunks
+        
+        # ========================================
+        # PHASE 3: INTELLIGENT ASSEMBLY
+        # ========================================
+        logger.info("[PHASE 3] Assembling final document...")
+        
+        # Calculate total tokens
+        total_tokens.total_tokens = total_tokens.prompt_tokens + total_tokens.completion_tokens
+        
+        # Build metadata from analysis
+        metadata = DocumentMetadata(
+            title=analysis.title,
+            document_type=analysis.document_type,
+            total_pages=analysis.total_pages,
+            language=analysis.language,
+        )
+        
+        # Build document
+        document = ExtractedDocument(
+            metadata=metadata,
+            summary=analysis.global_context,  # Use global context as summary
+            key_points=[],  # Will be populated from sections
+            sections=all_sections,
+            tables=all_tables,
+            images=all_images,
+            code_blocks=all_code_blocks,
+            equations=all_equations,
+            references=all_references,
+        )
+        
+        logger.info(
+            f"[COMPLETE] Large document extraction finished: "
+            f"{len(document.sections)} sections, {len(document.tables)} tables, "
+            f"{len(document.images)} images, {len(document.equations)} equations"
+        )
+        logger.info(f"Total tokens - {total_tokens}")
+        
+        return ExtractionResult(
+            document=document,
+            token_usage=total_tokens,
+            finish_reason="STOP",
+            was_truncated=False,
+        )
+    
     def extract(
         self,
         pdf_path: Union[str, Path],

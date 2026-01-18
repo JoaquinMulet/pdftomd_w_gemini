@@ -216,3 +216,70 @@ class ExtractionResult(BaseModel):
         default=False,
         description="Whether the response was truncated due to token limits"
     )
+
+
+# ===========================================
+# Intelligent Chunking Models
+# ===========================================
+
+class ChunkSuggestion(BaseModel):
+    """A suggested chunk for extracting a portion of a large document."""
+    
+    chunk_id: str = Field(
+        description="Unique identifier for the chunk (e.g., 'chunk_1')"
+    )
+    start_page: int = Field(
+        description="Starting page number (1-indexed)"
+    )
+    end_page: int = Field(
+        description="Ending page number (inclusive)"
+    )
+    content_type: str = Field(
+        description="Type of content in this chunk (e.g., 'introduction', 'methodology', 'results', 'discussion', 'references')"
+    )
+    section_titles: List[str] = Field(
+        description="List of section titles/headings contained in this chunk"
+    )
+    has_tables: bool = Field(
+        default=False,
+        description="Whether this chunk contains tables"
+    )
+    has_figures: bool = Field(
+        default=False,
+        description="Whether this chunk contains figures/images"
+    )
+    has_equations: bool = Field(
+        default=False,
+        description="Whether this chunk contains mathematical equations"
+    )
+    has_code: bool = Field(
+        default=False,
+        description="Whether this chunk contains code blocks"
+    )
+
+
+class DocumentAnalysis(BaseModel):
+    """Structural analysis of a document for intelligent chunking."""
+    
+    title: str = Field(
+        description="Document title"
+    )
+    document_type: str = Field(
+        description="Type of document (academic paper, textbook chapter, report, etc.)"
+    )
+    total_pages: int = Field(
+        description="Total number of pages in the document"
+    )
+    language: str = Field(
+        description="Primary language of the document"
+    )
+    sections_outline: List[str] = Field(
+        description="Complete outline of all sections and subsections in order"
+    )
+    global_context: str = Field(
+        description="2-3 paragraph summary providing context about the entire document, its purpose, main topics, and key findings"
+    )
+    suggested_chunks: List[ChunkSuggestion] = Field(
+        description="Suggested chunks for extraction, each covering logical sections of the document"
+    )
+
