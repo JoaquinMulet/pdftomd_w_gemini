@@ -254,7 +254,7 @@ ADDITIONAL CONTEXT:
         logger.info(f"Cache created: {cached_content.name}")
         return cached_content
     
-    def _query_cached(self, prompt: str, cached_content, response_schema=None, max_retries: int = 3) -> dict:
+    def _query_cached(self, prompt: str, cached_content, response_schema=None, max_retries: int = 5, json_mode: bool = False) -> dict:
         """
         Make a query against cached content with retry logic.
         
@@ -262,7 +262,8 @@ ADDITIONAL CONTEXT:
             prompt: The extraction prompt.
             cached_content: The cache object.
             response_schema: Optional Pydantic model for structured output.
-            max_retries: Maximum retry attempts.
+            max_retries: Maximum retry attempts (default: 5 for robustness).
+            json_mode: If True, forces JSON response format.
             
         Returns:
             Dict with response text, token usage, and finish reason.
@@ -275,8 +276,11 @@ ADDITIONAL CONTEXT:
             "max_output_tokens": 65536,
         }
         
-        if response_schema:
+        # Enable JSON mode if requested or if using response_schema
+        if json_mode or response_schema:
             config["response_mime_type"] = "application/json"
+        
+        if response_schema:
             config["response_schema"] = response_schema
         
         for attempt in range(max_retries):
@@ -401,7 +405,8 @@ Return this exact JSON structure (fill in the values):
 }
 
 Create 2-5 chunks covering all pages. Each chunk should cover logically related sections.""",
-            cached_content
+            cached_content,
+            json_mode=True  # Force JSON response format
         )
         
         total_tokens.prompt_tokens += analysis_result["token_usage"]["prompt"]
@@ -475,7 +480,7 @@ IMPORTANT:
 - Include ALL tables, figures, equations in this page range
 - If an element type doesn't exist in these pages, return empty array"""
             
-            chunk_result = self._query_cached(chunk_prompt, cached_content)
+            chunk_result = self._query_cached(chunk_prompt, cached_content, json_mode=True)
             
             total_tokens.prompt_tokens += chunk_result["token_usage"]["prompt"]
             total_tokens.completion_tokens += chunk_result["token_usage"]["completion"]
