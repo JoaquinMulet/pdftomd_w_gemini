@@ -203,6 +203,7 @@ ADDITIONAL CONTEXT:
         self,
         pdf_path: Union[str, Path],
         include_web_context: bool = False,
+        max_retries: int = 3,
     ) -> ExtractedDocument:
         """
         Extract content from a PDF document.
@@ -210,10 +211,13 @@ ADDITIONAL CONTEXT:
         Args:
             pdf_path: Path to the PDF file.
             include_web_context: If True and search is enabled, adds web context.
+            max_retries: Maximum number of retry attempts on failure.
             
         Returns:
             ExtractedDocument with all extracted content.
         """
+        import time
+        
         pdf_part = self._load_pdf(pdf_path)
         prompt = self._build_extraction_prompt(
             include_web_context=include_web_context and self.use_search
@@ -221,11 +225,12 @@ ADDITIONAL CONTEXT:
         
         logger.info(f"Sending PDF to {self.model} for extraction...")
         
-        # Build generation config
+        # Build generation config with explicit output token limit
         config = {
             "response_mime_type": "application/json",
             "response_schema": ExtractedDocument,
             "temperature": self.temperature,
+            "max_output_tokens": 65536,  # Maximum to avoid truncation
         }
         
         # Add Gemini 3 tools if enabled
@@ -233,30 +238,58 @@ ADDITIONAL CONTEXT:
         if tools:
             config["tools"] = tools
         
-        try:
-            response = self.client.models.generate_content(
-                model=self.model,
-                contents=[pdf_part, prompt],
-                config=config,
-            )
-            
-            logger.info("Extraction complete. Validating response...")
-            
-            # Parse and validate the response
-            document = ExtractedDocument.model_validate_json(response.text)
-            
-            logger.info(
-                f"Extracted: {len(document.sections)} sections, "
-                f"{len(document.tables)} tables, "
-                f"{len(document.images)} images, "
-                f"{len(document.equations)} equations"
-            )
-            
-            return document
-            
-        except Exception as e:
-            logger.error(f"Extraction failed: {e}")
-            raise
+        last_error = None
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    wait_time = 2 ** attempt  # Exponential backoff: 2, 4, 8 seconds
+                    logger.info(f"Retry attempt {attempt + 1}/{max_retries} after {wait_time}s...")
+                    time.sleep(wait_time)
+                
+                response = self.client.models.generate_content(
+                    model=self.model,
+                    contents=[pdf_part, prompt],
+                    config=config,
+                )
+                
+                logger.info("Extraction complete. Validating response...")
+                
+                # Check finish_reason for diagnostics
+                finish_reason = None
+                if response.candidates and len(response.candidates) > 0:
+                    finish_reason = response.candidates[0].finish_reason
+                    logger.info(f"Finish reason: {finish_reason}")
+                    
+                    # Detect truncation
+                    if finish_reason and str(finish_reason) == "MAX_TOKENS":
+                        logger.warning("Response was TRUNCATED due to max_output_tokens limit!")
+                
+                # Check for empty response
+                if response.text is None:
+                    raise ValueError(f"API returned empty response (None). Finish reason: {finish_reason}")
+                
+                # Log response size for debugging
+                response_len = len(response.text)
+                logger.info(f"Response size: {response_len:,} characters")
+                
+                # Parse and validate the response
+                document = ExtractedDocument.model_validate_json(response.text)
+                
+                logger.info(
+                    f"Extracted: {len(document.sections)} sections, "
+                    f"{len(document.tables)} tables, "
+                    f"{len(document.images)} images, "
+                    f"{len(document.equations)} equations"
+                )
+                
+                return document
+                
+            except Exception as e:
+                last_error = e
+                logger.warning(f"Attempt {attempt + 1} failed: {e}")
+                if attempt == max_retries - 1:
+                    logger.error(f"Extraction failed after {max_retries} attempts: {e}")
+                    raise
     
     def to_markdown(self, document: ExtractedDocument) -> str:
         """
