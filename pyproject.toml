@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdftomd"
+version = "0.1.0"
+description = "Extract PDF content to Markdown using Google Gemini"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+keywords = ["pdf", "markdown", "gemini", "ai", "extraction", "converter"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "google-genai>=1.0.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.scripts]
+pdftomd = "pdftomd.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/pdftomd"
+Documentation = "https://github.com/yourusername/pdftomd#readme"
+Repository = "https://github.com/yourusername/pdftomd"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pdftomd*"]
