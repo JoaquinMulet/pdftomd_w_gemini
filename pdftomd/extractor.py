@@ -263,6 +263,15 @@ ADDITIONAL CONTEXT:
                     # Detect truncation
                     if finish_reason and str(finish_reason) == "MAX_TOKENS":
                         logger.warning("Response was TRUNCATED due to max_output_tokens limit!")
+                    
+                    # Handle RECITATION - retry may help
+                    if finish_reason and "RECITATION" in str(finish_reason):
+                        logger.warning("Model stopped due to RECITATION detection. Retrying...")
+                        raise ValueError(f"RECITATION detected - model stopped to avoid copying content.")
+                    
+                    # Handle SAFETY - content filtered
+                    if finish_reason and "SAFETY" in str(finish_reason):
+                        raise ValueError(f"Content blocked due to safety filters.")
                 
                 # Check for empty response
                 if response.text is None:
@@ -361,6 +370,15 @@ ADDITIONAL CONTEXT:
                     was_truncated = finish_reason == "MAX_TOKENS"
                     if was_truncated:
                         logger.warning("Response was TRUNCATED due to max_output_tokens limit!")
+                    
+                    # Handle RECITATION - model stopped due to potential content copying
+                    if "RECITATION" in finish_reason:
+                        logger.warning(f"Model stopped due to RECITATION detection. Retrying...")
+                        raise ValueError(f"RECITATION detected - model stopped to avoid copying content. Retry may help.")
+                    
+                    # Handle SAFETY - content filtered
+                    if "SAFETY" in finish_reason:
+                        raise ValueError(f"Content was blocked due to safety filters. Finish reason: {finish_reason}")
                 
                 if response.text is None:
                     raise ValueError(f"API returned empty response. Finish reason: {finish_reason}")
