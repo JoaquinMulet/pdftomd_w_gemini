@@ -1,5 +1,5 @@
-"""PDFtoMD CLI entry point."""
-from pdftomd.cli import main
+"""Entry point for python -m pdftomd"""
+from .cli import main
 
 if __name__ == "__main__":
     main()

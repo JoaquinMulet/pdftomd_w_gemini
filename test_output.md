@@ -1,389 +1,448 @@
 ---
-title: "EARNINGS MANIPULATION SHENANIGANS"
-subtitle: "PART TWO"
-type: "book chapter"
-language: "en"
-pages: 21
+title: "Agentic Design Patterns: A Hands-On Guide to Building Intelligent Systems"
+type: Book (Pre-print Excerpt)
+language: English
+pages: 22
 ---
 
-## Summary
-
-This document constitutes Part Two of a comprehensive analysis of financial shenanigans, specifically focusing on Earnings Manipulation (EM). It introduces seven distinct categories of EM shenanigans used by dishonest corporate executives to misrepresent company performance and manipulate declared earnings. The primary objective of this section is to help skeptical investors identify these tricks to avoid financial losses. The text categorizes these manipulations into two subgroups: those that inflate current-period earnings and those that inflate future-period earnings (often for the purpose of earnings smoothing).
-
-The core of the document is Chapter 3, which details 'Shenanigan No. 1: Recording Revenue Too Soon.' This chapter explores various creative and often fraudulent techniques used to accelerate revenue recognition. These include 'calendar games' like stretching months beyond 30 or 31 days, recording revenue before completing material contract obligations, and recognizing sales before final buyer acceptance. The text emphasizes that while these schemes may temporarily boost stock prices and executive compensation, they ultimately lead to massive losses and regulatory action when discovered.
-
-Through numerous high-profile case studies—including MicroStrategy, Computer Associates, Sunbeam, Keurig Green Mountain, and Valeant—the document illustrates the warning signs of aggressive accounting. Key indicators for investors include 'boomerang' transactions, suspicious timing of press releases, changes in revenue recognition policies (such as switching from 'sell-through' to 'sell-in'), and spikes in 'days sales outstanding' (DSO). The analysis concludes that investors must look beyond quarterly earnings releases and scrutinize 10-K and 10-Q footnotes to detect these deceptive practices.
-
-## Key Points
-
-- Earnings manipulation is categorized into seven main shenanigans, with the first five aimed at inflating current earnings and the last two at smoothing or shifting earnings.
-- Shenanigan No. 1 involves recording revenue too soon through techniques like 'calendar games' (e.g., Computer Associates' 35-day months).
-- 'Boomerang' transactions, where money flows in a circle between seller and customer, are a major red flag for illegitimate revenue recognition.
-- Changes in revenue recognition policies, such as moving from 'sell-through' to 'sell-in' or from delivery to shipment, are often used to mask slowing growth.
-- Percentage-of-Completion (POC) accounting provides significant latitude for management to pull forward revenue by manipulating cost estimates.
-- Investors should closely monitor 'Days Sales Outstanding' (DSO); a sharp increase often indicates aggressive revenue recognition or poor cash management.
-- Bill-and-hold arrangements and consignment sales are frequently abused to record revenue before a true sale to an end user has occurred.
-- Management may use 'side letter' agreements to void sales if customers fail to receive funding, yet still record the revenue prematurely.
-- Scrutinizing footnotes in 10-K and 10-Q filings is essential, as these often contain the only disclosure of critical accounting policy changes.
+# Summary
+This document is a pre-print excerpt of "Agentic Design Patterns" by Antonio Gulli, which serves as a practical guide for developers building autonomous AI systems. It outlines the evolution of AI from simple Large Language Models (LLMs) to sophisticated, collaborative multi-agent systems, emphasizing the use of "design patterns" to solve recurring architectural challenges. The text introduces a five-step operational loop for agents, categorizes agent complexity into four distinct levels, and proposes five future hypotheses regarding the integration of AI agents into the global economy and physical world.
+
+# Key Points
+*   **Definition of AI Agents:** Systems designed to perceive their environment, make informed decisions based on goals, and execute actions autonomously, moving beyond the rigid instructions of traditional software.
+*   **The Five-Step Loop:** Agents operate through a continuous cycle: Get the Mission, Scan the Scene, Think It Through, Take Action, and Learn and Get Better.
+*   **Evolutionary Path:** The AI paradigm has shifted from basic LLM workflows to Retrieval-Augmented Generation (RAG), then to individual AI Agents, and finally to "Agentic AI" where specialized agents collaborate.
+*   **Levels of Complexity:** Agent capabilities are ranked from Level 0 (Core Reasoning) to Level 3 (Collaborative Multi-Agent Systems), mirroring human organizational structures.
+*   **Context Engineering:** A critical discipline involving the strategic selection and packaging of information to prevent cognitive overload and ensure high-quality agent performance.
+*   **Core Frameworks:** The guide utilizes LangChain/LangGraph, Crew AI, and the Google Agent Developer Kit (Google ADK) as the primary "canvases" for building agents.
+*   **Future Hypotheses:** Predictions include the emergence of generalist agents, deep personalization, embodied agents in robotics, an agent-driven economy, and self-improving metamorphic systems.
+*   **Responsibility and Trust:** Emphasizes "Building with Purpose," "Looking Around Corners," and "Inspiring Trust" as essential tenets for deploying agents in high-stakes environments like finance.
+
+# Table of Contents
+*   Dedication
+*   Acknowledgment
+*   Foreword
+*   A Thought Leader's Perspective: Power and Responsibility
+*   Introduction
+*   What makes an AI system an "agent"?
+*   **Part One (Total: 103 pages)**
+    *   Chapter 1: Prompt Chaining
+    *   Chapter 2: Routing
+    *   Chapter 3: Parallelization
+    *   Chapter 4: Reflection
+    *   Chapter 5: Tool Use
+    *   Chapter 6: Planning
+    *   Chapter 7: Multi-Agent
+*   **Part Two (Total: 61 pages)**
+    *   Chapter 8: Memory Management
+    *   Chapter 9: Learning and Adaptation
+    *   Chapter 10: Model Context Protocol (MCP)
+    *   Chapter 11: Goal Setting and Monitoring
+*   **Part Three (Total: 34 pages)**
+    *   Chapter 12: Exception Handling and Recovery
+    *   Chapter 13: Human-in-the-Loop
+    *   Chapter 14: Knowledge Retrieval (RAG)
+*   **Part Four (Total: 114 pages)**
+    *   Chapter 15: Inter-Agent Communication (A2A)
+    *   Chapter 16: Resource-Aware Optimization
+    *   Chapter 17: Reasoning Techniques
+    *   Chapter 18: Guardrails/Safety Patterns
+    *   Chapter 19: Evaluation and Monitoring
+    *   Chapter 20: Prioritization
+    *   Chapter 21: Exploration and Discovery
+*   **Appendix (Total: 74 pages)**
+    *   Appendix A: Advanced Prompting Techniques
+    *   Appendix B: AI Agentic ....: From GUI to Real world environment
+    *   Appendix C: Quick overview of Agentic Frameworks
+    *   Appendix D: Building an Agent with AgentSpace (on-line only)
+    *   Appendix E: AI Agents on the CLI (online)
+    *   Appendix F: Under the Hood: An Inside Look at the Agents’ Reasoning Engines
+    *   Appendix G: Coding agents
+*   Conclusion
+*   Glossary
+*   Index of Terms
+
+---
+
+# Full Content
+
+## Agentic Design Patterns
+**A Hands-On Guide to Building Intelligent Systems¹**
+**Antonio Gulli**
+
+Table of Contents - total 424 pages = 1+2+1+1+4+9+103+61+34+114+74+5+4 11
+
+Dedication, 1 page
+Acknowledgment, 2 pages [final, last read done]
+Foreword, 1 page [final, last read done]
+A Thought Leader's Perspective: Power and Responsibility [final, last read done]
+Introduction, 4 pages [final, last read done]
+What makes an AI system an "agent"?, 9 pages [final, last read done]
+
+**Part One, (Total: 103 pages)**
+1. Chapter 1: Prompt Chaining (code), 12 pages [final, last read done, code ok]
+2. Chapter 2: Routing (code), 13 pages [fina, last read done, code ok]
+3. Chapter 3: Parallelization (code), 15 pages [final, last read done, code ok]
+4. Chapter 4: Reflection (code), 13 pages [final, last read done, code ok]
+5. Chapter 5: Tool Use (code), 20 pages [final, last read done, code ok]
+6. Chapter 6: Planning (code), 13 pages [final, last read done, code ok]
+7. Chapter 7: Multi-Agent (code), 17 pages [final, last read done, code ok], **121**
+
+**Part Two (Total: 61 pages)**
+8. Chapter 8: Memory Management (code), 21 pages [final, last read done, code ok]
+9. Chapter 9: Learning and Adaptation (code), 12 pages [final, last read done, code ok]
+10. Chapter 10: Model Context Protocol (MCP) (code), 16 pages [final, last read done, code ok]
+11. Chapter 11: Goal Setting and Monitoring (code), 12 pages [final, last read don, code ok], **182**
 
-## Table of Contents
+**Part Three (Total: 34 pages)**
+12. Chapter 12: Exception Handling and Recovery (code), 8 pages [final, last read done, code ok]
+13. Chapter 13: Human-in-the-Loop (code), 9 pages [final, last read done, code ok]
+14. Chapter 14: Knowledge Retrieval (RAG) (code), 17 pages [final, last read done, code ok], **216**
 
-- [PART TWO: EARNINGS MANIPULATION SHENANIGANS](#part-two-earnings-manipulation-shenanigans)
-  - [Inflating Current-Period Earnings](#inflating-current-period-earnings)
-  - [Inflating Future-Period Earnings](#inflating-future-period-earnings)
-- [3 Earnings Manipulation Shenanigan No. 1: Recording Revenue Too Soon](#3-earnings-manipulation-shenanigan-no-1-recording-revenue-too-soon)
-  - [Techniques to Record Revenue Too Soon](#techniques-to-record-revenue-too-soon)
-  - [1. Recording Revenue Before Completing Material Obligations Under the Contract](#1-recording-revenue-before-completing-material-obligations-under-the-contract)
-    - [Riding the Tech Wave at Microstrategy](#riding-the-tech-wave-at-microstrategy)
-    - [Living a Dream—and a Nightmare](#living-a-dreamand-a-nightmare)
-    - [What Led to the Collapse?](#what-led-to-the-collapse)
-    - [Warning Signs for Investors Found in Odd Press Releases](#warning-signs-for-investors-found-in-odd-press-releases)
-    - [Key Lessons for Investors](#key-lessons-for-investors)
-  - [Calendar Games](#calendar-games)
-    - [Be Wary of Companies That Extend Their Quarter-End Date](#be-wary-of-companies-that-extend-their-quarter-end-date)
-  - [Changing Accounting Policies to Keep the Streak Alive](#changing-accounting-policies-to-keep-the-streak-alive)
-  - [2. Recording Revenue Far in Excess of Work Completed on the Contract](#2-recording-revenue-far-in-excess-of-work-completed-on-the-contract)
-    - [Changing Revenue Recognition Policy to Record Revenue Sooner (and Greater Amounts)](#changing-revenue-recognition-policy-to-record-revenue-sooner-and-greater-amounts)
-    - [Watch for a Change in Revenue Recognition Policy to Hide Collapsing Business](#watch-for-a-change-in-revenue-recognition-policy-to-hide-collapsing-business)
-    - [Changing Estimates and Assumptions When Using POC Accounting](#changing-estimates-and-assumptions-when-using-poc-accounting)
-    - [Accounting Capsule: Background on Percentage-of-Completion (POC)](#accounting-capsule-background-on-percentage-of-completion-poc)
-    - [Be Alert for Up-Front Recognition of a Long-Term License Contract](#be-alert-for-up-front-recognition-of-a-long-term-license-contract)
-    - [Regulators Also Strongly Disagreed with the Approach](#regulators-also-strongly-disagreed-with-the-approach)
-  - [3. Recording Revenue Before the Buyer’s Final Acceptance of the Product](#3-recording-revenue-before-the-buyers-final-acceptance-of-the-product)
-    - [Seller Records Revenue Before Shipment](#seller-records-revenue-before-shipment)
-    - [Watch for Bill-and-Hold Transactions Initiated by the Seller](#watch-for-bill-and-hold-transactions-initiated-by-the-seller)
-    - [Seller Records Revenue upon Shipment to Someone Other Than the Customer](#seller-records-revenue-upon-shipment-to-someone-other-than-the-customer)
-    - [Watch for Shipping Product to an Intermediary, Rather Than the Actual Customer](#watch-for-shipping-product-to-an-intermediary-rather-than-the-actual-customer)
-    - [Be Wary of Consignment Arrangements](#be-wary-of-consignment-arrangements)
-    - [Who Is the Actual Customer—the Distributor or the End User?](#who-is-the-actual-customerthe-distributor-or-the-end-user)
-    - [Seller Records Revenue, but Buyer Can Still Reject the Sale](#seller-records-revenue-but-buyer-can-still-reject-the-sale)
-    - [Be Wary of Sellers Deliberately Shipping Incorrect or Incomplete Products](#be-wary-of-sellers-deliberately-shipping-incorrect-or-incomplete-products)
-    - [Be Alert to Sellers Shipping Product Before the Agreed-upon Shipping Date](#be-alert-to-sellers-shipping-product-before-the-agreed-upon-shipping-date)
-    - [Be Mindful of Sellers Recording Revenue Before the Lapse of the Right of Return](#be-mindful-of-sellers-recording-revenue-before-the-lapse-of-the-right-of-return)
-  - [4. Recording Revenue When the Buyer’s Payment Remains Uncertain or Unnecessary](#4-recording-revenue-when-the-buyers-payment-remains-uncertain-or-unnecessary)
-    - [Buyer Lacks the Ability or the Necessary Approval to Pay](#buyer-lacks-the-ability-or-the-necessary-approval-to-pay)
-    - [Watch for Companies That Change Their Assessment of Customers’ Ability to Pay](#watch-for-companies-that-change-their-assessment-of-customers-ability-to-pay)
-    - [Seller Induces Sale by Allowing an Exceptionally Long Time to Pay](#seller-induces-sale-by-allowing-an-exceptionally-long-time-to-pay)
-    - [Watch for Seller-Provided Financing](#watch-for-seller-provided-financing)
-    - [Watch for Companies That Offer Extended or Flexible Payment Terms](#watch-for-companies-that-offer-extended-or-flexible-payment-terms)
-    - [Sound the Alarm When New Extended Payment Terms Are Disclosed and DSO Jumps](#sound-the-alarm-when-new-extended-payment-terms-are-disclosed-and-dso-jumps)
-  - [Looking Ahead](#looking-ahead)
+**Part Four (Total: 114 pages)**
+15. Chapter 15: Inter-Agent Communication (A2A) (code), 15 pages [final, last read done, code ok]
+16. Chapter 16: Resource-Aware Optimization (code), 15 pages [final, last read done, code ok]
+17. Chapter 17: Reasoning Techniques (code), 24 pages [final, last read done, code ok]
+18. Chapter 18: Guardrails/Safety Patterns (code), 19 pages [final, last read done, code ok]
+19. Chapter 19: Evaluation and Monitoring (code), 18 pages [final, last read done, code ok]
+20. Chapter 20: Prioritization (code), 10 pages [final, last read done, code ok ]
+21. Chapter 21: Exploration and Discovery (code), 13 pages [final, last read done, code ok], **330**
 
-# PART TWO: EARNINGS MANIPULATION SHENANIGANS
+**Appendix (Total: 74 pages)**
+22. Appendix A: Advanced Prompting Techniques, 28 pages [final, last read done, code ok]
+23. Appendix B - AI Agentic ….: From GUI to Real world environment, 6 pages [final, last read done, code ok]
+24. Appendix C - Quick overview of Agentic Frameworks, 8 pages [final, last read done, code ok] ,
+25. Appendix D - Building an Agent with AgentSpace (on-line only), 6 pages [final, last read done, code ok]
+26. Appendix E - AI Agents on the CLI (online) , 5 pages [final, last read done, code ok]
+27. Appendix F - Under the Hood: An Inside Look at the Agents’ Reasoning Engines, 14 pages [final, lrd, code ok],
+28. Appendix G - Coding agents, 7 pages **406**
 
-Investors rely on the information that they receive from companies to make informed and rational securities selection decisions. This information is assumed to be accurate, whether the news is good or bad. While most corporate executives respect investors and their needs, some dishonest ones hurt investors by misrepresenting the actual company performance and manipulating the company’s declared earnings. Part Two fleshes out the seven categories of Earnings Manipulation (EM) Shenanigans and suggests how skeptical investors can ferret out these tricks to avoid losses.
+Conclusion, 5 pages [final, last read done]
+Glossary, 4 pages [final, last read done]
+Index of Terms, 11 pages (Generated by Gemini. Reasoning step included as an agentic example) [final, lrd]
+Online contribution - Frequently Asked Questions: Agentic Design Patterns
+Pre Print: [https://www.amazon.com/Agentic-Design-Patterns-Hands-Intelligent/dp/3032014018/](https://www.amazon.com/Agentic-Design-Patterns-Hands-Intelligent/dp/3032014018/)
 
-**EARNINGS MANIPULATION SHENANIGANS**
-* **EM Shenanigan No. 1:** Recording revenue too soon (Chapter 3)
-* **EM Shenanigan No. 2:** Recording bogus revenue (Chapter 4)
-* **EM Shenanigan No. 3:** Boosting income using one-time or unsustainable activities (Chapter 5)
-* **EM Shenanigan No. 4:** Shifting current expenses to a later period (Chapter 6)
-* **EM Shenanigan No. 5:** Employing other techniques to hide expenses or losses (Chapter 7)
-* **EM Shenanigan No. 6:** Shifting current income to a later period (Chapter 8)
-* **EM Shenanigan No. 7:** Shifting future expenses to the current period (Chapter 9)
+¹ All my royalties will be donated to Save the Children
 
-Management may use a variety of techniques to give investors the mistaken impression that the company is performing better than the underlying economic reality. We have categorized all these earnings manipulation tricks into two major subgroups: inflating current-period earnings and inflating future-period earnings.
+1
 
-## Inflating Current-Period Earnings
+---
+*(Page 2 contains an abstract artistic image of blue swirling lines and the page number 2)*
+---
 
-Quite simply, to inflate current-period earnings, management must either push more revenue or gains into the current period or shift expenses to a later one. Shenanigans Nos. 1, 2, and 3 push revenue or one-time gains into current-period operations, and Nos. 4 and 5 shift expenses to a later period.
+To my son, Bruno,
 
-## Inflating Future-Period Earnings
+who at two years old, brought a new and brilliant light into my life. As I explore the systems that will define our tomorrow, it is the world you will inherit that is foremost in my thoughts.
 
-Conversely, to inflate tomorrow’s operations, management would simply hold back today’s revenue or gains and accelerate tomorrow’s expenses or losses into the current period. Shenanigan No. 6 describes techniques to improperly hold back revenue, and Shenanigan No. 7 accelerates expenses into an incorrect earlier period.
+To my sons, Leonardo and Lorenzo, and my daughter Aurora,
 
-Earnings can be inflated by inappropriately including revenues or gains and by excluding rightful expenses or losses of that period. Conversely, earnings can be deflated by inappropriately excluding revenues or gains of that period and by including expenses or losses that really pertain to another period. Of course, a scheme to deflate current-period earnings pays off when those benefits are released into a later period.
+My heart is filled with pride for the women and men you have become and the wonderful world you are building.
 
-Of the seven categories of Earnings Manipulation Shenanigans, the first five serve to inflate earnings, and the last two serve to lower profits. For most readers, the use of Shenanigans Nos. 1 through 5 to exaggerate earnings might seem more logical or intuitive. After all, higher reported profits often lead to a higher stock price and higher executive compensation. The logic of using Shenanigans Nos. 6 and 7 may be less obvious, but they do serve a purpose. These schemes serve to shift earnings from one period (with excess profits) to another (in need of profits). Put differently, management may simply be attempting to smooth out volatile earnings to portray a less volatile business.
+This book is about how to build intelligent tools, but it is dedicated to the profound hope that your generation will guide them with wisdom and compassion. The future is incredibly bright, for you and for us all, if we learn to use these powerful technologies to serve humanity and help it progress.
 
-# 3 Earnings Manipulation Shenanigan No. 1: Recording Revenue Too Soon
+With all my love.
 
-Thirty days has September,
-April, June, and November;
-Of twenty-eight there is but one,
-And all the rest have thirty-one.
-—A MODERN VERSION OF THE FIFTEENTH-CENTURY MEDIEVAL BRITISH RHYME
+---
 
-As young children, many of us were taught this useful rhyme to help remember the number of days in each month. Frankly, it still comes in handy as a reminder well into our adult years. It was much later in life though when we realized that February was not necessarily the only exception to the 30- or 31-day rule. In fact, every month could be the exception for a company that wishes to inflate its revenue. Computer Associates (CA) had become the poster child for this revenue inflation trick, regularly stretching out its months to 35 days on the books in order to capture sales booked after the conventional month-end. That scheme worked well for a while—or at least until the company was caught and CEO Sanjay Kumar was sent to jail.
+## Acknowledgment
 
-Stretching out the number of days in a month is but one of the creative techniques that management may use to improperly record revenue too early. This chapter describes a variety of ways in which management attempts to accelerate revenue to earlier periods and how investors can spot signs of this transgression.
+I would like to express my sincere gratitude to the many individuals and teams who made this book possible.
 
-## Techniques to Record Revenue Too Soon
+First and foremost, I thank Google for adhering to its mission, empowering Googlers, and respecting the opportunity to innovate.
 
-1. Recording revenue before completing material obligations under the contract
-2. Recording revenue far in excess of work completed on the contract
-3. Recording revenue before the buyer’s final acceptance of the product
-4. Recording revenue when the buyer’s payment remains uncertain or unnecessary
+I am grateful to the Office of the CTO for giving me the opportunity to explore new areas, for adhering to its mission of "practical magic," and for its capacity to adapt to new emerging opportunities.
 
-## 1. Recording Revenue Before Completing Material Obligations Under the Contract
+I would like to extend my heartfelt thanks to Will Grannis, our VP, for the trust he puts in people and for being a servant leader. To John Abel, my manager, for encouraging me to pursue my activities and for always providing great guidance with his British acumen. I extend my gratitude to Antoine Larmanjat for our work on LLMs in code, Hann Hann Wang for agent discussions, and Yingchao Huang for time series insights. Thanks to Ashwin Ram for leadership, Massy Mascaro for inspiring work, Jennifer Bennett for technical expertise, Brett Slatkin for engineering, and Eric Schen for stimulating discussions. The OCTO team, especially Scott Penberthy, deserves recognition. Finally, deep appreciation to Patricia Florissi for her inspiring vision of Agents' societal impact.
 
+My appreciation also goes to Marco Argenti for the challenging and motivating vision of agents augmenting the human workforce. My thanks also go to Jim Lanzone and Jordi Ribas for pushing the bar on the relationship between the world of Search and the world of Agents.
 
+I am also indebted to the Cloud AI teams, especially their leader Saurabh Tiwary, for driving the AI organization towards principled progress. Thank you to Salem Salem Haykal, the Area Technical Leader, for being an inspiring colleague. My thanks to Vladimir Vuskovic, co-founder of Google Agentspace, Kate (Katarzyna) Olszewska for our Agentic collaboration on Kaggle Game Arena, and Nate Keating for driving Kaggle with passion, a community that has given so much to AI. My thanks also to Kamelia Aryafa, leading applied AI and ML teams focused on Agentspace and Enterprise NotebookLM, and to Jahn Wooland, a true leader focused on delivering and a personal friend always there to provide advice.
 
-### Riding the Tech Wave at Microstrategy
+A special thanks to Yingchao Huang for being a brilliant AI engineer with a great career in front of you, Hann Wang for challenging me to return to my interest in Agents after an initial interest in 1994, and to Lee Boonstra for your amazing work on prompt engineering.
 
-Who could forget the raging Internet-driven bull market during the late 1990s (with the Nasdaq Index up 94 percent in 1999) and the almost-anything-goes accounting practices used to fuel the stratospheric growth of many tech companies? Perhaps the poster child for this crazy period would be Virginia-based software seller MicroStrategy (MSTR). In less than two years after going public, its market value reached $25 billion, a staggering 60-fold increase. A key driver of its growth, it turns out, was a practice of recording sales to parties that MicroStrategy had recently invested in. While it’s impossible to know for sure whether these were in fact sham transactions, the fact pattern raised serious suspicion. In addition to these questionable sales, MSTR pushed customers to sign contracts just before quarter-end, believing that the signing of a contract was the key event to permit recording revenue. As we will discuss later, revenue is recognized when earned, that is, when services have been performed.
+My thanks also go to the 5 Days of GenAI team, including our VP Alison Wagonfeld for the trust put in the team, Anant Nawalgaria for always delivering, and Paige Bailey for her can-do attitude and leadership.
 
-### Living a Dream—and a Nightmare
+I am also deeply grateful to Mike Styer, Turan Bulmus, and Kanchana Patlolla for helping me ship three Agents at Google I/O 2025. Thank you for your immense work.
 
-Imagine living the American dream during the Internet era. You and your college buddy create a software company. For the first few years, you work around the clock, but you take virtually no cash compensation. Instead, you reward yourself and your valued employees with stock and stock options. You begin meeting with investment bankers to plan your much-anticipated initial public offering (IPO). Then it happens—the bankers successfully peddle your shares to the public. You now have your first few million. But that’s only the beginning. The share price of your (now public) company begins to levitate wildly, you become one of the wealthiest people in America, and at age 34, you are not even old enough to run for the presidency. The media treat you like royalty.
+I want to express my sincere gratitude to Thomas Kurian for his unwavering leadership, passion, and trust in driving the Cloud and AI initiatives. I also deeply appreciate Emanuel Taropa, whose inspiring "can-do" attitude made him the most exceptional colleague I've encountered at Google, setting a truly profound example. Finally, thanks to Fiona Cicconi for our engaging discussions about Google.
 
-This was the real-life dream of MicroStrategy’s founder, Michael Saylor. Founded in 1989, MSTR went public in 1998 at a market valuation over $200 million. That was only the beginning of an incredible odyssey. In the last four months of 1999, the share price began to rise dramatically, from $20 to over $100. Over the next 10 weeks, the stock soared incredibly to $333. Michael Saylor’s net worth reached an almost inconceivable $14 billion.
+I extend my gratitude to Demis Hassabis, Pushmeet Kohli, and the entire GDM team for their passionate efforts in developing Gemini, AlphaFold, AlphaGo, and AlphaGenome, among other projects, and for their contributions to advancing science for the benefit of society. A special thank you to Yossi Matias for his leadership of Google Research and for consistently offering invaluable advice. I have learned a great deal from you.
 
-Then the dream turned into a nightmare of epic proportions. On March 20, 2000, MSTR disclosed to investors that its financial reports contained material accounting irregularities. The financial reports for 1997 to 1999 had to be restated, resulting in massive losses, rather than the previously reported profits. Shocked investors started dumping the stock, dropping the share price $140 (from $226 to $86) in a single day. But that was only the beginning. It didn’t bottom out until reaching $1.75 twelve months later. (The share price continued declining through 2002, at which point the company announced a 1-for-10 reverse split [effectively pushing its share price up 10-fold] to avoid being delisted from the stock exchange.)
+A special thanks to Patti Maes, who pioneered the concept of Software Agents in the 90s and remains focused on the question of how computer systems and digital devices might augment people and assist them with issues such as memory, learning, decision making, health, and wellbeing. Your vision back in '91 became a reality today.
 
-### What Led to the Collapse?
+I also want to extend my gratitude to Paul Drougas and all the Publisher team at Springer for making this book possible.
 
-In early March 2000, only weeks after its auditors, PricewaterhouseCoopers (PwC), had blessed MSTR’s 1999 financial reports (contained in a prospectus for a proposed stock offering), Forbes magazine broke the story that raised troubling questions about the company’s revenue recognition practices.
+I am deeply indebted to the many talented people who helped bring this book to life. My heartfelt thanks go to Marco Fago for his immense contributions, from code and diagrams to reviewing the entire text. I’m also grateful to Mahtab Syed for his coding work and to Ankita Guha for her incredibly detailed feedback on so many chapters. The book was significantly improved by the insightful amendments from Priya Saxena, the careful reviews from Jae Lee, and the dedicated work of Mario da Roza in creating the NotebookLM version. I was fortunate to have a team of expert reviewers for the initial chapters, and I thank Dr. Amita Kapoor, Fatma Tarlaci, PhD, Dr. Alessandro Cornacchia, and Aditya Mandlekar for lending their expertise. My sincere appreciation also goes to Ashley Miller, A Amir John, and Palak Kamdar (Vasani) for their unique contributions. For their steadfast support and encouragement, a final, warm thank you is due to Rajat Jain, Aldo Pahor, Gaurav Verma, Pavithra Sainath, Mariusz Koczwara, Abhijit Kumar, Armstrong Foundjem, Haiming Ran, Udita Patel, and Kaurnakar Kotha.
 
-After the Forbes article, PwC then conducted an internal investigation and concluded that the company’s audited financial reports indeed were false and misleading. The auditor’s swift about-face, an extremely rare event, sent the share price into a free fall.
+This project truly would not have been possible without you. All the credit goes to you, and all the mistakes are mine.
 
-### Warning Signs for Investors Found in Odd Press Releases
+*All my royalties are donated to Save the Children.*
 
-On October 5, 1999, MSTR announced in a press release that it had signed a deal with NCR Corporation. In the release, MSTR described a $52.5 million licensing agreement and a partnership with NCR Corporation. Under the agreement, MSTR invested in an NCR partnership, and NCR returned the favor and purchased MSTR’s products. When money flows in both directions, from seller (MSTR) to customer (NCR) and then from customer to seller, we call it a “boomerang” transaction. As the press release put it:
+3
 
-> Under the terms of the partnership, NCR signed a $27.5 million OEM [original equipment manufacturer] agreement for MicroStrategy’s products and personal information services. In addition, MicroStrategy has chosen to purchase an NCR Teradata Warehouse worth $11 million to power the Strategy.com network.
+---
 
-As part of the OEM agreement, NCR will become a master affiliate of Strategy.com. As a master affiliate, NCR will join the network, sell Strategy.com affiliations, and sell MicroStrategy products and services. As part of the agreement, MicroStrategy will provide NCR’s future OLAP technology. MicroStrategy has agreed to purchase NCR’s TeraCube business and all related intellectual property in exchange for $14 million in MicroStrategy stock.
+## Foreword
 
-Then just after the December 1999 quarter ended, on January 6, 2000, MSTR sent out another press release (excerpts shown below), also including a suspicious “boomerang” payment scheme that contributed to reported revenue, likely in the preceding period.
+The field of artificial intelligence is at a fascinating inflection point. We are moving beyond building models that can simply process information to creating intelligent systems that can reason, plan, and act to achieve complex goals with ambiguous tasks. These "agentic" systems, as this book so aptly describes them, represent the next frontier in AI, and their development is a challenge that excites and inspires us at Google.
 
-> Under the terms of the agreement, Exchange Applications will pay MicroStrategy an initial $30 million fee, payable through the combination of cash and Exchange Applications stock, of which approximately one-third will be recognized by MicroStrategy as revenue during the fourth quarter of 1999. In addition, MicroStrategy can earn up to an additional $35 million for future eCRM applications over the next two to three years. As part of the agreement, Exchange Applications will become a master affiliate of Strategy.com. As a master affiliate, Exchange Applications will join the network, sell Strategy.com affiliations, and sell MicroStrategy products and services.
+"Agentic Design Patterns: A Hands-On Guide to Building Intelligent Systems" arrives at the perfect moment to guide us on this journey. The book rightly points out that the power of large language models, the cognitive engines of these agents, must be harnessed with structure and thoughtful design. Just as design patterns revolutionized software engineering by providing a common language and reusable solutions to common problems, the agentic patterns in this book will be foundational for building robust, scalable, and reliable intelligent systems.
 
-### Key Lessons for Investors
+The metaphor of a "canvas" for building agentic systems is one that resonates deeply with our work on Google's Vertex AI platform. We strive to provide developers with the most powerful and flexible canvas on which to build the next generation of AI applications. This book provides the practical, hands-on guidance that will empower developers to use that canvas to its full potential. By exploring patterns from prompt chaining and tool use to agent-to-agent collaboration, self-correction, safety and guardrails, this book offers a comprehensive toolkit for any developer looking to build sophisticated AI agents.
 
-Two important lessons can be gleaned from the MicroStrategy story: (1) Funds flowing back and forth between a customer and seller should raise suspicions about the legitimacy of both transactions, and (2) the suspicious timing of press releases announcing new sales (just after a period ended) should raise questions about whether revenue might have been recognized too early. Indeed, as we learned from other sources, MSTR regularly rushed to have sales contracts signed and dated just before a period ended, with the goal of accelerating revenue into that earlier period. We believe that from an accounting perspective such efforts were all for naught, as revenue should be recognized when earned, not at the point of signing a contract.
+The future of AI will be defined by the creativity and ingenuity of developers who can build these intelligent systems. "Agentic Design Patterns" is an indispensable resource that will help to unlock that creativity. It provides the essential knowledge and practical examples to not only understand the "what" and "why" of agentic systems, but also the "how."
 
-## Calendar Games
+I am thrilled to see this book in the hands of the developer community. The patterns and principles within these pages will undoubtedly accelerate the development of innovative and impactful AI applications that will shape our world for years to come.
 
-Imagine if you could place a bet on a horse race after the race ends. That sounds ridiculous; since you already would know the results beforehand, naturally, you would always win. Well, that approach reminds us of companies in jeopardy of “losing”—that is, failing to meet Wall Street’s consensus estimates—those companies that at quarter-end stretch out the end date (like CA using 35 days) to ensure that they also always win by closing their books only after reaching the desired sales and profits.
+Saurabh Tiwary
+VP & General Manager, CloudAI @ Google
 
-### Be Wary of Companies That Extend Their Quarter-End Date
+---
 
-CA was not alone in improperly inflating revenue by keeping the books open beyond the prescribed quarter-end. During the mid-1990s, “Chainsaw Al” Dunlap and his minions at Sunbeam changed the company’s quarter-end from March 29 to March 31 to make up for a revenue shortfall. The two additional days permitted Sunbeam to record another $5 million in sales from its core operations and $15 million more from its recently acquired Coleman Corporation.
+## A Thought Leader's Perspective: Power and Responsibility
 
-Not to be outdone by CA and Sunbeam, San Diego–based software maker Peregrine also routinely kept its books open well after the official quarter ended. The practice became so common at the company that officers joked about this ploy, characterizing these late transactions as having been completed on “the thirty-seventh of December.”
+Of all the technology cycles I’ve witnessed over the past four decades—from the birth of the personal computer and the web, to the revolutions in mobile and cloud—none has felt quite like this one. For years, the discourse around Artificial Intelligence was a familiar rhythm of hype and disillusionment, the so-called “AI summers” followed by long, cold winters. But this time, something is different. The conversation has palpably shifted. If the last eighteen months were about the engine—the breathtaking, almost vertical ascent of Large Language Models (LLMs)—the next era will be about the car we build around it. It will be about the frameworks that harness this raw power, transforming it from a generator of plausible text into a true agent of action.
 
-## Changing Accounting Policies to Keep the Streak Alive
+I admit, I began as a skeptic. Plausibility, I’ve found, is often inversely proportional to one’s own knowledge of a subject. Early models, for all their fluency, felt like they were operating with a kind of impostor syndrome, optimized for credibility over correctness. But then came the inflection point, a step-change brought about by a new class of "reasoning" models. Suddenly, we weren't just conversing with a statistical machine that predicted the next word in a sequence; we were getting a peek into a nascent form of cognition.
 
-As we discussed earlier, when senior executives boast about an amazing record streak of performance, it is more likely that they will resort to financial shenanigans to keep that streak alive.
+The first time I experimented with one of the new agentic coding tools, I felt that familiar spark of magic. I tasked it with a personal project I’d never found the time for: migrating a charity website from a simple web builder to a proper, modern CI/CD environment. For the next twenty minutes, it went to work, asking clarifying questions, requesting credentials, and providing status updates. It felt less like using a tool and more like collaborating with a junior developer. When it presented me with a fully deployable package, complete with impeccable documentation and unit tests, I was floored.
 
-Consider how the popular coffee seller Keurig Green Mountain (Keurig) tried to hide its slowing revenue growth from investors. The company whimsically changed its decision rules on when recognition begins and where large-quantity rebates get categorized on the Income Statement. Keurig was growing very fast in the 2005–2008 period, and CEO Lawrence J. Blanford, proud of this achievement, regularly boasted to investors in Earnings Releases:
+Of course, it wasn't perfect. It made mistakes. It got stuck. It required my supervision and, crucially, my judgment to steer it back on course. The experience drove home a lesson I’ve learned the hard way over a long career: you cannot afford to trust blindly. Yet, the process was fascinating. Peeking into its "chain of thought" was like watching a mind at work—messy, non-linear, full of starts, stops, and self-corrections, not unlike our own human reasoning. It wasn’t a straight line; it was a random walk toward a solution. Here was the kernel of something new: not just an intelligence that could generate content, but one that could generate a *plan*.
 
-> It is great to be sharing such favorable results again this today. 2007 was a year of strong financial returns with net sales and earnings increasing 52% over the prior year. It was Green Mountain Coffee’s 20th consecutive quarter of double-digit net sales growth and eighth consecutive quarter with growth in excess of 25%.
+This is the promise of agentic frameworks. It’s the difference between a static subway map and a dynamic GPS that reroutes you in real-time. A classic rules-based automaton follows a fixed path; when it encounters an unexpected obstacle, it breaks. An AI agent, powered by a reasoning model, has the potential to observe, adapt, and find another way. It possesses a form of digital common sense that allows it to navigate the countless edge cases of reality. It represents a shift from simply telling a computer *what* to do, to explaining *why* we need something done and trusting it to figure out the *how*.
 
-As we know, compounding anything at over 25 percent for a long time produces pretty big numbers. In the case of sales growth, it would be virtually impossible that a streak at that elevated level could be sustained. So it would be only a matter of time before Keurig would have to either announce that the streak had ended or figure out a way to make it appear that the streak had continued. Unfortunately, Keurig chose the latter approach. Reading the company’s 10-K filings for fiscal 2007 and 2008, we came across two subtle (but important) accounting policy changes that management made in 2008 to inflate revenue. First, the company began to recognize some revenue earlier in the sales process—at the point of shipment, rather than delivery. Second, it started to treat incentives or “rebates” to customers as an operating expense rather than a reduction of sales.
+As exhilarating as this new frontier is, it brings a profound sense of responsibility, particularly from my vantage point as the CIO of a global financial institution. The stakes are immeasurably high. An agent that makes a mistake while creating a recipe for a "Chicken Salmon Fusion Pie" is a fun anecdote. An agent that makes a mistake while executing a trade, managing risk, or handling client data is a real problem. I’ve read the disclaimers and the cautionary tales: the web automation agent that, after failing a login, decided to email a member of parliament to complain about login walls. It’s a darkly humorous reminder that we are dealing with a technology we don’t fully understand.
 
-**KEURIG GREEN MOUNTAIN FOOTNOTES DESCRIBING ITS REVENUE RECOGNITION POLICY**
-* **10-K 2007—**Revenue from wholesale and consumer direct sales is recognized upon product delivery. In addition, the Company’s customers can earn certain incentives, which are netted against sales in the consolidated income statements. [Italics added for emphasis]
-* **10-K 2008—**Revenue from wholesale and consumer direct sales is recognized upon product delivery, and in some cases upon product shipment. In addition, the Company’s customers can earn certain incentives, which are netted against sales or recorded in operating and selling expenses in the consolidated income statements. [Italics added for emphasis]
+This is where craft, culture, and a relentless focus on our principles become our essential guide. Our Engineering Tenets are not just words on a page; they are our compass. We must *Build with Purpose*, ensuring that every agent we design starts from a clear understanding of the client problem we are solving. We must *Look Around Corners*, anticipating failure modes and designing systems that are resilient by design. And above all, we must *Inspire Trust*, by being transparent about our methods and accountable for our outcomes.
 
-## 2. Recording Revenue Far in Excess of Work Completed on the Contract
+In an agentic world, these tenets take on new urgency. The hard truth is that you cannot simply overlay these powerful new tools onto messy, inconsistent systems and expect good results. Messy systems plus agents are a recipe for disaster. An AI trained on "garbage" data doesn’t just produce garbage-out; it produces plausible, confident garbage that can poison an entire process. Therefore, our first and most critical task is to prepare the ground. We must invest in clean data, consistent metadata, and well-defined APIs. We have to build the modern "interstate system" that allows these agents to operate safely and at high velocity. It is the hard, foundational work of building a programmable enterprise, an "enterprise as software," where our processes are as well-architected as our code.
 
-The first section illustrated how companies improperly recognize revenue by recording sales before significant activities by the seller even take place. Next, we discuss revenue recognition when the seller has started to deliver on the contract; however, management records revenue in a far greater amount than is warranted.
+Ultimately, this journey is not about replacing human ingenuity, but about augmenting it. It demands a new set of skills from all of us: the ability to explain a task with clarity, the wisdom to delegate, and the diligence to verify the quality of the output. It requires us to be humble, to acknowledge what we don’t know, and to never stop learning. The pages that follow in this book offer a technical map for building these new frameworks. My hope is that you will use them not just to build what is possible, but to build what is right, what is robust, and what is responsible.
 
-### Changing Revenue Recognition Policy to Record Revenue Sooner (and Greater Amounts)
+The world is asking every engineer to step up. I am confident we are ready for the challenge.
 
-Like Keurig, companies can also change their revenue recognition policy for ongoing projects to inflate sales and operating profits. Consider the plight of Japanese manufacturer Ulvac when its business struggled mightily and management considered ways to “solve” its problems by changing its accounting policies.
+Enjoy the journey.
 
-### Watch for a Change in Revenue Recognition Policy to Hide Collapsing Business
+Marco Argenti, CIO, Goldman Sachs
 
-What to do when your business is collapsing and you hope to hide that fact from investors? In 2010, Ulvac found a very clever solution, but it involved an outrageous financial shenanigan. Table 3-1 shows the audited results Ulvac reported for the fiscal years ended June 2008, 2009, and 2010.
+---
 
-After a rocky 2009 (with sales plummeting 7 percent and operating profits declining 62 percent), 2010 looked like a successful turnaround period (with sales growth improving to just negative 1 percent and operating profits jumping an impressive 38 percent). It certainly appeared that the company had done an excellent job in managing costs in a period of no top-line growth. The problem, however, was that the 2010 results were woefully misleading. Specifically, Ulvac had just changed its revenue recognition approach to percentage-of-completion (POC), and as a result, it began booking sales much earlier than it would with its traditional approach. Table 3-2 shows the results Ulvac would have reported, assuming no change in revenue recognition policies. Sobering and shocking results for investors.
+## Preface
 
-Notice in the right-hand column, “Adjusted Percent Change” in 2010, and compare with the change shown Table 3-1—a decline in sales of 1 percent. Rather than sales basically stabilizing in 2010, after a 7 percent decline the prior year, sales would have plummeted 21 percent, completely freaking out investors. So in order to avoid that disappointment, Ulvac’s management found a solution, and its auditors inexplicably approved—changing its revenue recognition policy and hiding its big problems from investors.
+Welcome to "Agentic Design Patterns: A Hands-On Guide to Building Intelligent Systems." As we look across the landscape of modern artificial intelligence, we see a clear evolution from simple, reactive programs to sophisticated, autonomous entities capable of understanding context, making decisions, and interacting dynamically with their environment and other systems. These are the intelligent agents and the agentic systems they comprise.
 
-### Changing Estimates and Assumptions When Using POC Accounting
+The advent of powerful large language models (LLMs) has provided unprecedented capabilities for understanding and generating human-like content such as text and media, serving as the cognitive engine for many of these agents. However, orchestrating these capabilities into systems that can reliably achieve complex goals requires more than just a powerful model. It requires structure, design, and a thoughtful approach to how the agent perceives, plans, acts, and interacts.
 
-Ulvac provides an illustration of the dramatic jump in reported revenue when a company switches from standard revenue recognition practices to the more aggressive POC approach. Investors also should be alert for companies using POC that simply change some key estimates or assumptions, as those actions can also materially inflate revenue.
+Think of building intelligent systems as creating a complex work of art or engineering on a canvas. This canvas isn't a blank visual space, but rather the underlying infrastructure and frameworks that provide the environment and tools for your agents to exist and operate. It's the foundation upon which you'll build your intelligent application, managing state, communication, tool access, and the flow of logic.
 
-Consider solar energy leader First Solar (FSLR) and its accounting changes to hide business setbacks from investors. In 2014, FSLR was building out some of the largest solar-powered power plants in the United States. Since these were long-term construction projects, First Solar applied percentage-of-completion accounting, and it determined the proportion of progress on each contract by calculating the costs incurred on the project as a percentage of the total expected costs. Under this method, any changes in the company’s estimate for total project costs would have had an immediate impact on reported revenue since it would have either increased or decreased the estimated progress toward completion.
+Building effectively on this agentic canvas demands more than just throwing components together. It requires understanding proven techniques – **patterns** – that address common challenges in designing and implementing agent behavior. Just as architectural patterns guide the construction of a building, or design patterns structure software, agentic design patterns provide reusable solutions for the recurring problems you'll face when bringing intelligent agents to life on your chosen canvas.
 
-Astute investors would have been tipped off about growing changes in estimates by reading the footnotes in First Solar’s 2014 10-K filing. When the company updated its estimates for total project costs in 2014, with one click of the mouse inside a spreadsheet, management immediately recognized an additional $40 million of sales (following a boost of $8.5 million in 2013). Moreover, since no additional costs were associated with this windfall revenue, gross profit and operating income increased by an equal amount.
+### What are Agentic Systems?
 
-POC accounting provides management with unusual latitude in its ability to pull forward revenue, but CA, an enterprise software company, took matters much further by pulling forward license revenue on multiyear licenses, which would not actually be earned for many years to come.
+At its core, an agentic system is a computational entity designed to perceive its environment (both digital and potentially physical), make informed decisions based on those perceptions and a set of predefined or learned goals, and execute actions to achieve those goals autonomously. Unlike traditional software, which follows rigid, step-by-step instructions, agents exhibit a degree of flexibility and initiative.
 
-### Accounting Capsule: Background on Percentage-of-Completion (POC)
+Imagine you need a system to manage customer inquiries. A traditional system might follow a fixed script. An agentic system, however, could perceive the nuances of a customer's query, access knowledge bases, interact with other internal systems (like order management), potentially ask clarifying questions, and proactively resolve the issue, perhaps even anticipating future needs. These agents operate on the canvas of your application's infrastructure, utilizing the services and data available to them.
 
-POC revenue recognition allows companies to report revenue even before a project has been completed. It was introduced so that firms working on long-term construction-type contracts could report business activity each period even if a product was not delivered to the customer. Under this framework companies are expected to estimate the proportion of the project that has been completed and to recognize a pro rata share of the total project’s revenue, expenses, and profits. Investors should be extra vigilant when analyzing companies using percentage-of-completion accounting, since the reported results hinge on the company’s estimates about its own progress.
+Agentic systems are often characterized by features like **autonomy**, allowing them to act without constant human oversight; **proactiveness**, initiating actions towards their goals; and **reactiveness**, responding effectively to changes in their environment. They are fundamentally **goal-oriented**, constantly working towards objectives. A critical capability is **tool use**, enabling them to interact with external APIs, databases, or services – effectively reaching out beyond their immediate canvas. They possess **memory**, retain information across interactions, and can engage in **communication** with users, other systems, or even other agents operating on the same or connected canvases.
 
-### Be Alert for Up-Front Recognition of a Long-Term License Contract
+Effectively realizing these characteristics introduces significant complexity. How does the agent maintain state across multiple steps on its canvas? How does it decide *when* and *how* to use a tool? How is communication between different agents managed? How do you build resilience into the system to handle unexpected outcomes or errors?
 
-CA sold long-term licenses allowing customers to use its mainframe computer software. Customers paid an up-front licensing fee for the software, as well as an annual charge to renew the license in subsequent years. Despite the long-term nature of these agreements (some contracts lasted as long as seven years), the company would recognize the present value of all licensing revenue for the entire contract immediately. Since all licensing revenue was recorded at the beginning of the contract, and cash was not collected for many years to come, CA recorded substantial amounts of long-term receivables on its Balance Sheet.
+### Why Patterns Matter in Agent Development
 
-### Regulators Also Strongly Disagreed with the Approach
+This complexity is precisely why agentic design patterns are indispensable. They are not rigid rules, but rather battle-tested templates or blueprints that offer proven approaches to standard design and implementation challenges in the agentic domain. By recognizing and applying these design patterns, you gain access to solutions that enhance the structure, maintainability, reliability, and efficiency of the agents you build on your canvas.
 
-The SEC charged that from January 1998 through October 2000, CA prematurely recognized over $3.3 billion in revenue from at least 363 software contracts with customers.
+Using design patterns helps you avoid reinventing fundamental solutions for tasks like managing conversational flow, integrating external capabilities, or coordinating multiple agent actions. They provide a common language and structure that makes your agent's logic clearer and easier for others (and yourself in the future) to understand and maintain. Implementing patterns designed for error handling or state management directly contributes to building more robust and reliable systems. Leveraging these established approaches accelerates your development process, allowing you to focus on the unique aspects of your application rather than the foundational mechanics of agent behavior.
 
-CA’s bulging long-term receivables should have alerted investors to the company’s aggressive revenue recognition. A careful review would have alerted investors to the firm’s surging long-term and total receivables as early as September 1998. Investors should use a measure called “days’ sales outstanding” (DSO) to evaluate how quickly customers are paying their bills relative to how quickly revenue is recorded. A higher DSO could indicate more aggressive revenue recognition in addition to simply poor cash management. With the company’s long-term installment receivables soaring at September 1998, its DSO reached 247 days (based on product revenue)—a year-over-year increase of 20 days. Furthermore, total receivables, including both current and long term, increased to 342 days—a jump of 31 days.
+This book extracts 21 key design patterns that represent fundamental building blocks and techniques for constructing sophisticated agents on various technical canvases. Understanding and applying these patterns will significantly elevate your ability to design and implement intelligent systems effectively.
 
-## 3. Recording Revenue Before the Buyer’s Final Acceptance of the Product
+### Overview of the Book and How to Use It
 
-In the first two sections of this chapter, we focused on the seller’s performance of its obligations under the contract. In the next two sections, we shift our focus to the buyer. This section deals with three types of tricks that produce revenue before final acceptance by the buyer, specifically, recording revenue (1) before shipment of product to the buyer, (2) after shipment but to someone other than the buyer, and (3) after shipment but while the buyer still could void the sale.
+This book, "Agentic Design Patterns: A Hands-On Guide to Building Intelligent Systems," is crafted to be a practical and accessible resource. Its primary focus is on clearly explaining each agentic pattern and providing concrete, runnable code examples to demonstrate its implementation. Across 21 dedicated chapters, we will explore a diverse range of design patterns, from foundational concepts like structuring sequential operations (Prompt Chaining) and external interaction (Tool Use) to more advanced topics like collaborative work (Multi-Agent Collaboration) and self-improvement (Self-Correction).
 
-### Seller Records Revenue Before Shipment
+The book is organized chapter by chapter, with each chapter delving into a single agentic pattern. Within each chapter, you will find:
 
-One problematic and often controversial method of revenue recognition involves so-called bill-and-hold arrangements. With this approach, the seller bills the customer and recognizes revenue but continues to hold the product. For most sales, revenue recognition requires shipment of the product to the customer. In certain cases, however, accounting guidelines allow revenue to be recognized under bill-and-hold transactions, provided that the customer requests this arrangement and is the main beneficiary. For example, if the buyer does not have adequate storage space, it may ask the seller to hold on to the purchased goods as a courtesy. Under no circumstances can early recognition of revenue occur under a bill-and-hold arrangement if the arrangement is initiated by the seller for the benefit of the seller (i.e., to record revenue at an earlier date).
+*   A detailed **Pattern Overview** providing a clear explanation of the pattern and its role in agentic design.
+*   A section on **Practical Applications & Use Cases** illustrating real-world scenarios where the pattern is invaluable and the benefits it brings.
+*   A **Hands-On Code Example** offering practical, runnable code that demonstrates the pattern's implementation using prominent agent development frameworks. This is where you'll see how to apply the pattern within the context of a technical canvas.
+*   **Key Takeaways** summarizing the most crucial points for quick review.
+*   **References** for further exploration, providing resources for deeper learning on the pattern and related concepts.
 
-### Watch for Bill-and-Hold Transactions Initiated by the Seller
+While the chapters are ordered to build concepts progressively, feel free to use the book as a reference, jumping to chapters that address specific challenges you face in your own agent development projects. The appendices provide a comprehensive look at advanced prompting techniques, principles for applying AI agents in real-world environments, and an overview of essential agentic frameworks. To complement this, practical online-only tutorials are included, offering step-by-step guidance on building agents with specific platforms like AgentSpace and for the command-line interface. The emphasis throughout is on practical application; we strongly encourage you to run the code examples, experiment with them, and adapt them to build your own intelligent systems on your chosen canvas.
 
-If it seems like the seller has initiated a bill-and-hold transaction, investors should assume that the seller has attempted to recognize revenue too early. For example, Sunbeam CEO Al Dunlap used a bill-and-hold strategy to make the company’s financial performance appear better than it really was by artificially inflating Sunbeam’s revenue.
+A great question I hear is, 'With AI changing so fast, why write a book that could be quickly outdated?' My motivation was actually the opposite. It's precisely because things are moving so quickly that we need to step back and identify the underlying principles that are solidifying. Patterns like RAG, Reflection, Routing, Memory and the others I discuss, are becoming fundamental building blocks. This book is an invitation to reflect on these core ideas, which provide the foundation we need to build upon. Humans need these reflection moments on foundation patterns.
 
-Sunbeam, anxious to boost sales in its “turnaround year,” hoped to convince retailers to buy grills nearly six months before they were needed. In exchange for major discounts and longer payment terms, retailers agreed to purchase merchandise that they would not physically receive until months later. In the meantime, the goods would be shipped out of the grill factory in Missouri to third-party warehouses leased by Sunbeam, where they would be held until the customers requested them.
+### Introduction to the Frameworks Used
 
-Nonetheless, Sunbeam booked the sales and profits from all $35 million in bill-and-hold transactions. When outside auditors later reviewed the documents, they reversed a staggering $29 million of the $35 million and shifted the sales to future quarters. In doing the initial audit, Arthur Andersen had questioned the accounting treatment of some transactions. But in almost every case, it concluded that the amounts were “immaterial” to the overall audit. Sometimes detecting signs of aggressive accounting is close to impossible. In the case of Sunbeam, it required nothing more than reading the revenue recognition footnote in the company’s 10-K.
+To provide a tangible "canvas" for our code examples (see also Appendix), we will primarily utilize three prominent agent development frameworks. **LangChain**, along with its stateful extension **LangGraph**, provides a flexible way to chain together language models and other components, offering a robust canvas for building complex sequences and graphs of operations. **Crew AI** provides a structured framework specifically designed for orchestrating multiple AI agents, roles, and tasks, acting as a canvas particularly well-suited for collaborative agent systems. The **Google Agent Developer Kit (Google ADK)** offers tools and components for building, evaluating, and deploying agents, providing another valuable canvas, often integrated with Google's AI infrastructure.
 
-**SUNBEAM’S 10-K FOOTNOTE DISCLOSURE TOLD THE STORY**
-> The Company recognizes revenues from product sales principally at the time of shipment to customers. In limited circumstances, at the customers’ request the Company may sell seasonal products on a bill-and-hold basis provided that the goods are completed, packaged and ready for shipment, such goods are segregated and the risks of ownership and legal title have passed to the customer. The amount of such bill-and-hold sales at December 29, 1997 was approximately 3 percent of consolidated revenues.
+These frameworks represent different facets of the agent development canvas, each with its strengths. By showing examples across these tools, you will gain a broader understanding of how the patterns can be applied regardless of the specific technical environment you choose for your agentic systems. The examples are designed to clearly illustrate the pattern's core logic and its implementation on the framework's canvas, focusing on clarity and practicality.
 
-Eventually, Dunlap was fired when the board of directors realized that he had done little to improve the company’s financial situation and had simply used improper financial engineering to drive the stock price higher.
+By the end of this book, you will not only understand the fundamental concepts behind 21 essential agentic patterns but also possess the practical knowledge and code examples to apply them effectively, enabling you to build more intelligent, capable, and autonomous systems on your chosen development canvas. Let's begin this hands-on journey!
 
-### Seller Records Revenue upon Shipment to Someone Other Than the Customer
+4
 
-Auditors often look to shipping records as evidence that the seller delivered its product to the customer, allowing revenue to be recorded. Management might attempt to trick its auditors (and its investors) into believing that a sale occurred by shipping products to someone other than the customer. Consider the case of Krispy Kreme Doughnuts.
+---
 
-Part of Krispy Kreme’s revenue comes from selling doughnut-making equipment to its franchisees. It would certainly be appropriate for the company to record sales revenue upon shipment of a machine to a franchisee—provided, of course, that the machine was received by the franchisee. In 2003, Krispy Kreme went to great lengths to fool its auditors by pretending to ship equipment to franchisees. It shipped the equipment out, but to company-owned trailers to which the franchisees had no access. Krispy Kreme still recorded the revenue, even though the customers had failed to take possession of the machines shipped.
+## What makes an AI system an Agent?
 
-### Watch for Shipping Product to an Intermediary, Rather Than the Actual Customer
+In simple terms, an **AI agent** is a system designed to perceive its environment and take actions to achieve a specific goal. It's an evolution from a standard Large Language Model (LLM), enhanced with the abilities to plan, use tools, and interact with its surroundings. Think of an Agentic AI as a smart assistant that learns on the job. It follows a simple, five-step loop to get things done (see Fig.1):
 
-Sometimes a seller will ship out product to a reseller before a deal has been fully completed. Autonomy was one of the largest software companies in the United Kingdom until being acquired by HP. To juice its revenue, it would book sales on software deals still under negotiation with end users (but had not yet closed) and transfer the associated product to resellers, which in turn would take ownership immediately and hold on to the product until the sales process with the end user was finalized. In exchange for “stepping into the transaction” and allowing Autonomy to recognize revenue immediately, Autonomy paid commission rates (akin to a bribe) of up to 10 percent, even though the reseller had virtually no role in the underlying sales process and often did not even have any information about the status of the deals.
+1.  **Get the Mission:** You give it a goal, like "organize my schedule."
+2.  **Scan the Scene:** It gathers all the necessary information—reading emails, checking calendars, and accessing contacts—to understand what's happening.
+3.  **Think It Through:** It devises a plan of action by considering the optimal approach to achieve the goal.
+4.  **Take Action:** It executes the plan by sending invitations, scheduling meetings, and updating your calendar.
+5.  **Learn and Get Better:** It observes successful outcomes and adapts accordingly. For example, if a meeting is rescheduled, the system learns from this event to enhance its future performance.
 
-### Be Wary of Consignment Arrangements
+### Agentic AI Problem-Solving Process
+*(Visual representation of the five steps as a funnel)*
+*   01: Get the Mission
+*   02: Scan the Scene
+*   03: Think It Through
+*   04: Take Action
+*   05: Learn & Get Better
 
-Another technique for prematurely recording revenue at the point of shipment involves consignment sales. With such sales, the products are shipped to an intermediary, called a “consignee.” Think of the consignee as an outside sales agent who is given the task of finding a buyer. Normally the manufacturer (called the “consignor”) should recognize no revenue until the sales agent consummates a transaction with an end customer. Chainsaw Al Dunlap and his minion at Sunbeam, not surprisingly, ignored that standard and recorded $36 million in consignment sales before an end user had even been found.
+1
 
-### Who Is the Actual Customer—the Distributor or the End User?
+---
 
-Companies that sell products through a distribution network must decide whether to book sales when they ship to the distributor (“sell-in” approach), or later when the distributor sends goods to the actual user of the product (“sell-through” approach). While both approaches are widely used, the sell-through approach is considered more conservative, as it more directly aligns reported revenue with end-customer demand. More aggressive (and most concerning) is when a company switches from the more conservative sell-through to the sell-in approach, which of course inflates sales. We saw an example of such a change at Medicis, shortly after the company was acquired by Valeant in December 2012.
+Fig.1: Agentic AI functions as an intelligent assistant, continuously learning through experience. It operates via a straightforward five-step loop to accomplish tasks.
 
-Valeant cleverly changed the existing revenue recognition policy at the newly acquired Medicis unit in the first quarter after the deal closed, so its sales would be recognized sooner and reported growth would be higher. Medicis sold product through its distributor, McKesson, which then sold it to physicians. Medicis historically used the more conservative sell-through approach, booking no sales until the distributor sold to the physicians. To goose sales at the Medicis unit after the deal closed, Valeant had Medicis immediately switch to the sell-in approach and started recognizing sales much earlier—when product was sent to the distributor. That brazen change in revenue recognition caught the attention of astute investors and eventually the SEC, which issued a formal letter of reprimand.
+Agents are becoming increasingly popular at a stunning pace. According to recent studies, a majority of large IT companies are actively using these agents, and a fifth of them just started within the past year. The financial markets are also taking notice. By the end of 2024, AI agent startups had raised more than $2 billion, and the market was valued at $5.2 billion. It's expected to explode to nearly $200 billion in value by 2034. In short, all signs point to AI agents playing a massive role in our future economy.
 
-Medicis was not the only case of revenue shenanigans in Valeant’s M&A path. Salix, acquired by Valeant in early 2015, had a string of even more troubling shenanigans in dealings with distributors. In the last quarter of 2013 and the first three quarters of 2014, it aggressively “stuffed the channel,” meaning it shipped much more product to the distributors than they could sell to their customers. And by using the sell-in approach, Salix materially inflated its revenue. When the scheme was detected late in 2014, Salix was forced to restate its previously released financial statements to lower revenue and profits during each of these four quarters.
+In just two years, the AI paradigm has shifted dramatically, moving from simple automation to sophisticated, autonomous systems (see Fig. 2). Initially, workflows relied on basic prompts and triggers to process data with LLMs. This evolved with Retrieval-Augmented Generation (RAG), which enhanced reliability by grounding models on factual information. We then saw the development of individual AI Agents capable of using various tools. Today, we are entering the era of Agentic AI, where a team of specialized agents works in concert to achieve complex goals, marking a significant leap in AI's collaborative power.
 
-Since all these details were publicly disclosed in late 2014, we are completely baffled why Valeant would still have closed on the acquisition. (We will have more on this in Part Five.)
+### Fig 2.: Transitioning from LLMs to RAG, then to Agentic RAG, and finally to Agentic AI.
 
-### Seller Records Revenue, but Buyer Can Still Reject the Sale
+*(Diagram showing the evolution)*
+*   **LLM Workflow:** User -> Prompt -> Rules based Trigger -> LLM (Tools/Data Sources) -> Output.
+*   **RAG:** User -> Prompt -> Retrieval (Data Sources/Vector Db) -> Augmented (Tools/Data) -> Output.
+*   **AI Agent:** User -> Prompt -> Planning (Chat/Database) -> Reasoning (Memory/Tools) -> Output.
+*   **Agentic AI:** User -> Prompt -> Agent 1 (Memory/Reasoning/Chat) <-> Agent 2 (Tools/Database/Human in the Loop) -> Output.
 
-The final part of this section discusses revenue that is recorded prematurely even though product was shipped and received by the customer. This may occur if (1) the customer received the wrong product, (2) the customer received the correct product, but too early, or (3) the customer received the correct product at the right time but still reserves the right to reject the sale. When a buyer has received a product but can still reject the sale, the seller must either wait until final acceptance to record revenue or recognize the revenue but record a reserve estimating the amount of anticipated returns.
+2
 
-### Be Wary of Sellers Deliberately Shipping Incorrect or Incomplete Products
+---
 
-Sometimes companies scheme to inflate revenue by intentionally shipping the wrong product and recording the related revenue, although they know full well that the product will be returned. Symbol Technologies allegedly shipped incorrect product without customer approval in order to report higher sales. Similarly, at the end of the fourth quarter of 1996, Informix recorded revenue but failed to deliver the required software code prior to year-end. Then in January 1997, Informix delivered a beta version of the software that did not function properly with the hardware. It took the company another six months to deliver usable software code. As it turned out, Informix recorded revenue far too early in the fourth quarter of 1996 rather than when the company had satisfied its obligations in the third quarter of 1997.
+The intent of this book is to discuss the design patterns of how specialized agents can work in concert and collaborate to achieve complex goals, and you will see one paradigm of collaboration and interaction in each chapter.
 
-### Be Alert to Sellers Shipping Product Before the Agreed-upon Shipping Date
+Before doing that, let's examine examples that span the range of agent complexity (see Fig. 3).
 
-The fiscal quarter is ending, and profits are sagging. What can a company do? Why not simply start shipping merchandise and recording revenue, thereby boosting sales and profits? Merchandise is rushed out of the warehouse to customers toward the end of the year (even before the sales have taken place), and sales revenue is recorded. Since under this method, revenue is recognized when an item is shipped to retailers or wholesalers, some manufacturers may be tempted to keep shipping their products during slow times—even if the retailers’ shelves are overstocked. Automobile manufacturers have been doing this for years, thereby artificially increasing their sales. By shipping a product late in a quarter, rather than during the following quarter when a customer expects to receive it, a seller can improperly record revenue too soon. An increase in DSO can often be an indicator that more products were shipped late in a quarter than usual.
+### Level 0: The Core Reasoning Engine
 
-Even if a company ships its products to the actual customer and the customer receives them, the company still may not be permitted to recognize revenue. The final hitch involves terms in many contracts that give the customer the right to return the products within a certain period of time.
+While an LLM is not an agent in itself, it can serve as the reasoning core of a basic agentic system. In a 'Level 0' configuration, the LLM operates without tools, memory, or environment interaction, responding solely based on its pretrained knowledge. Its strength lies in leveraging its extensive training data to explain established concepts. The trade-off for this powerful internal reasoning is a complete lack of current-event awareness. For instance, it would be unable to name the 2025 Oscar winner for "Best Picture" if that information is outside its pre-trained knowledge.
 
-### Be Mindful of Sellers Recording Revenue Before the Lapse of the Right of Return
+### Level 1: The Connected Problem-Solver
 
-Many businesses permit the buyer a “right of return” if the customer is not satisfied with the goods. In those cases, companies are required to either delay revenue recognition until the right of return lapses or estimate the amount of expected returns and reduce revenue by that amount. If the actual level of returned products is more than the company’s initial estimates, the company may be guilty of having recognized too much revenue up front.
+At this level, the LLM becomes a functional agent by connecting to and utilizing external tools. Its problem-solving is no longer limited to its pre-trained knowledge. Instead, it can execute a sequence of actions to gather and process information from sources like the internet (via search) or databases (via Retrieval Augmented Generation, or RAG). For detailed information, refer to Chapter 14.
 
-## 4. Recording Revenue When the Buyer’s Payment Remains Uncertain or Unnecessary
+For instance, to find new TV shows, the agent recognizes the need for current information, uses a search tool to find it, and then synthesizes the results. Crucially, it can also use specialized tools for higher accuracy, such as calling a financial API to get the live stock price for AAPL. This ability to interact with the outside world across multiple steps is the core capability of a Level 1 agent.
 
-Continuing our focus on the buyer, we turn our attention to the revenue recognition requirement concerning customer payment. The seller may be accelerating revenue recognition if it records sales when the buyer lacks the ability to pay (payment remains uncertain) or when the seller aggressively induces the sale by not requiring the customer to pay until long after the sale (payment remains unnecessary).
+### Level 2: The Strategic Problem-Solver
 
-### Buyer Lacks the Ability or the Necessary Approval to Pay
+At this level, an agent's capabilities expand significantly, encompassing strategic planning, proactive assistance, and self-improvement, with prompt engineering and context engineering as core enabling skills.
 
-In earlier sections, we discussed the requirement that the seller complete its obligations and the requirement that a buyer convey final acceptance. At Kendall Square Research Corporation, a computer systems maker in Cambridge, Massachusetts, all of that took place—the product was shipped, and the customer accepted it. The final question was whether the customer had the wherewithal and the intention to pay. Many of Kendall Square’s customers—mainly universities and research institutions—required a third party to provide the funds. In truth, the sale was contingent on the receipt of outside funding, and thus no revenue should have been recognized until such funding had been secured. Kendall Square must have been aware of those contingencies, since it was later revealed that the company had provided customers with “side letter” agreements that essentially voided the sales if the customers failed to receive funding.
+First, the agent moves beyond single-tool use to tackle complex, multi-part problems through strategic problem-solving. As it executes a sequence of actions, it actively performs context engineering: the strategic process of selecting, packaging, and managing the most relevant information for each step. For example, to find a coffee shop between two locations, it first uses a mapping tool. It then engineers this output, curating a short, focused context—perhaps just a list of street names—to feed into a local search tool, preventing cognitive overload and ensuring the second step is efficient and accurate. To achieve maximum accuracy from an AI, it must be given a short, focused, and powerful context. Context engineering is the discipline that accomplishes this by strategically selecting, packaging, and managing the most critical information from all available sources. It effectively curates the model's limited attention to prevent overload and ensure high-quality, efficient performance on any given task. For detailed information, refer to the Appendix A.
 
-A shareholder lawsuit charged that nearly half of Kendall Square’s reported revenue in the first quarter of 1993 had been improperly booked. Most of this revenue came from shipments to the University of Colorado and the Applied Computer Systems Institute of Massachusetts before these customers had received sufficient funding. The company eventually restated its financial statements for fiscal 1992 and the first half of 1993, reversing approximately half of its previously reported revenue.
+This level leads to proactive and continuous operation. A travel assistant linked to your email demonstrates this by engineering the context from a verbose flight confirmation email; it selects only the key details (flight numbers, dates, locations) to package for subsequent tool calls to your calendar and a weather API.
 
-### Watch for Companies That Change Their Assessment of Customers’ Ability to Pay
+In specialized fields like software engineering, the agent manages an entire workflow by applying this discipline. When assigned a bug report, it reads the report and accesses the codebase, then strategically engineers these large sources of information into a potent, focused context that allows it to efficiently write, test, and submit the correct code patch.
 
-Management’s assessment of a customer’s ability to pay is what determines the estimates used to account for uncollectible receivables. Changes in these assessments may provide companies with a nonrecurring boost to revenue. Consider the revenue recognition policy change made by software company Openwave Systems in December 2005.
+Finally, the agent achieves self-improvement by refining its own context engineering processes. When it asks for feedback on how a prompt could have been improved, it is learning how to better curate its initial inputs. This allows it to automatically improve how it packages information for future tasks, creating a powerful, automated feedback loop that increases its accuracy and efficiency over time. For detailed information, refer to Chapter 17.
 
-Openwave initially waited until the receipt of cash before recognizing any revenue from “deadbeat” customers that it feared might not pay. Under a new policy, Openwave could recognize revenue immediately, simply by concluding that the customer no longer was a deadbeat.
+4
 
-Investors who noticed this subtle change by management would have recognized that Openwave’s business was actually growing more slowly than reported. Openwave’s change in policy indeed reflected its desperation. Revenue growth slowed dramatically in the following years, and Openwave’s stock price, which spent much of the March 2006 quarter above $20, plummeted to $6 in July. Diligent investors who reviewed the company’s December 2015 10-Q would have easily spotted this change in the revenue recognition footnote, as shown below. However, investors who relied only on the company’s quarterly Earnings Release and conference call may have missed the boat, as those disclosures made no mention of the change in accounting.
+---
 
-**OPENWAVE SYSTEMS REVENUE RECOGNITION CHANGE DISCLOSURE, 12/05 10-Q**
-> As of the quarter ended December 31, 2005, the Company revised its policy regarding the determination factor for deferrals of revenue recognition for arrangements deemed not probable for collection. Prior to the quarter ended December 31, 2005, the Company continued to defer revenue recognition on arrangements originally deemed not probable for collection until the receipt of cash from that arrangement. As of the quarter ended December 31, 2005, the Company revised its policy such that revenue on arrangements previously deemed not probable for collection, which are subsequently deemed probable for collection, is recognized in the period of the change in the assessment of collectability, rather than upon receipt of cash, provided all other revenue recognition criteria have been satisfied. This change in policy did not have a material impact for the quarter ended December 31, 2005. [Italics added for emphasis]
+### Fig. 3: Various instances demonstrating the spectrum of agent complexity.
 
-### Seller Induces Sale by Allowing an Exceptionally Long Time to Pay
+*(Pyramid diagram of levels)*
+*   **Level 3:** The Rise of Collaborative Multi-Agent Systems
+*   **Level 2:** The Strategic Problem-Solver
+*   **Level 1:** The Connected Problem-Solver
+*   **Level 0:** The Core Reasoning Engine
 
-Rather than using a third-party institution for financing, some cash-strapped customers use financing provided by the seller itself. Investors should be cautious about seller-provided financing arrangements (including very generous extended payment terms), as they may indicate the acceleration of revenue into the current period, tepid customer interest in the product, or the buyer’s lack of ability to pay.
+### Level 3: The Rise of Collaborative Multi-Agent Systems
 
-### Watch for Seller-Provided Financing
+At Level 3, we see a significant paradigm shift in AI development, moving away from the pursuit of a single, all-powerful super-agent and towards the rise of sophisticated, collaborative multi-agent systems. In essence, this approach recognizes that complex challenges are often best solved not by a single generalist, but by a team of specialists working in concert. This model directly mirrors the structure of a human organization, where different departments are assigned specific roles and collaborate to tackle multi-faceted objectives. The collective strength of such a system lies in this division of labor and the synergy created through coordinated effort. For detailed information, refer to Chapter 7.
 
-To accelerate revenue in recent years, a number of high-tech companies have lent money to customers to enable them to pay for their products. In moderation, customer financing can be considered a sound selling technique; when it is abused, however, it can be a dangerous way to do business. When the dot-com bubble burst, the amount of financing provided by telecommunication equipment suppliers to their customers should have made investors nervous. At the end of 2000, these suppliers were collectively owed as much as $15 billion by customers, a 25 percent increase in a single year.
+To bring this concept to life, consider the intricate workflow of launching a new product. Rather than one agent attempting to handle every aspect, a "Project Manager" agent could serve as the central coordinator. This manager would orchestrate the entire process by delegating tasks to other specialized agents: a "Market Research" agent to gather consumer data, a "Product Design" agent to develop concepts, and a "Marketing" agent to craft promotional materials. The key to their success would be the seamless communication and information sharing between them, ensuring all individual efforts align to achieve the collective goal.
 
-### Watch for Companies That Offer Extended or Flexible Payment Terms
+5
 
-Sometimes companies offer sweet payment terms to entice their customers to purchase additional products earlier than normal. While offering favorable payment terms to customers may be a completely appropriate business practice, it may also add a level of uncertainty to the eventual collectibility of receivables. Moreover, even when extending terms to creditworthy customers, overly generous terms may effectively shift sales that originally were slated for future periods into the current one. This shift would allow for unsustainably high near-term revenue growth and produce pressure to fill the void created in that later period.
+---
 
-### Sound the Alarm When New Extended Payment Terms Are Disclosed and DSO Jumps
+While this vision of autonomous, team-based automation is already being developed, it's important to acknowledge the current hurdles. The effectiveness of such multi-agent systems is presently constrained by the reasoning limitations of LLMs they are using. Furthermore, their ability to genuinely learn from one another and improve as a cohesive unit is still in its early stages. Overcoming these technological bottlenecks is the critical next step, and doing so will unlock the profound promise of this level: the ability to automate entire business workflows from start to finish.
 
-Investors should be particularly concerned about accelerated (or even improper) revenue recognition when a company begins extending very generous payment terms and DSO spikes, as shown in Table 3-3. The deck materials supplier Trex Company, for example, provided extended payment terms to customers under what it called an “early buy program” in late 2004 and early 2005. As demand declined, it seemed that Trex enticed customers to accept products earlier than normal (without having to pay for them). This arrangement had minimal impact on the buyers’ total purchases but allowed Trex to record revenue in an earlier period. Astute analysts would have surmised that extended payment terms were needed to avoid reporting disappointing sales growth. Several months later, Trex announced that its revenue for June 2005 would be much lower than Wall Street expectations. Trex’s sharp increase in receivables, together with the company’s disclosure of extended payment terms and an early buy program, should have alerted investors to the coming slowdown in sales growth.
+## The Future of Agents: Top 5 Hypotheses
 
-More recently, investors in San Francisco–based Fitbit were jolted during the company’s November 2016 conference call when management suddenly lowered guidance for future sales growth by a stunning 15 percent. To put that in some perspective, in Q4 2015 sales grew 92 percent, and now the sales growth estimate in Q4 2016 would be only 2 to 5 percent. Yikes!
+AI agent development is progressing at an unprecedented pace across domains such as software automation, scientific research, and customer service among others. While current systems are impressive, they are just the beginning. The next wave of innovation will likely focus on making agents more reliable, collaborative, and deeply integrated into our lives. Here are five leading hypotheses for what's next (see Fig. 4).
 
-That announcement by management marked the end of a period of hypergrowth fueled by new fitness tracking products and geographic expansion. But were there no warnings for investors that business was really starting to struggle? Indeed, signs of a weakening business (obscured by shenanigans) could be found in the second-quarter earnings conference call. In his remarks, the CFO mentioned in passing that Fitbit had just extended payment terms to “certain customers in Asia Pac [Pacific], due to the channel inventory levels previously discussed.” In that one cryptic sentence, management signaled serious business challenges in Asia, which had been covered up by offering distributors there more time to pay. As is often the case when business problems are being covered up by management, the deceptions tend to work only for a short period; sure enough, by December 2016, unsuspecting investors were stunned as Fitbit’s stock collapsed 50 percent.
+### Hypothesis 1: The Emergence of the Generalist Agent
 
-## Looking Ahead
+The first hypothesis is that AI agents will evolve from narrow specialists into true generalists capable of managing complex, ambiguous, and long-term goals with high reliability. For instance, you could give an agent a simple prompt like, "Plan my company's offsite retreat for 30 people in Lisbon next quarter." The agent would then manage the entire project for weeks, handling everything from budget approvals and flight negotiations to venue selection and creating a detailed itinerary from employee feedback, all while providing regular updates. Achieving this level of autonomy will require fundamental breakthroughs in AI reasoning, memory, and near-perfect reliability. An alternative, yet not mutually exclusive, approach is the rise of Small Language Models (SLMs). This "Lego-like" concept involves composing systems from small, specialized expert agents rather than scaling up a single monolithic model. This method promises systems that are cheaper, faster to debug, and easier to deploy. Ultimately, the development of large generalist models and the composition of smaller specialized ones are both plausible paths forward, and they could even complement each other.
 
-This chapter addressed accounting tricks involving mainly legitimate sources of revenue. Chapter 4 describes a more sinister transgression: recording bogus or fictitious revenue.
+### Hypothesis 2: Deep Personalization and Proactive Goal Discovery
 
-## Tables
+The second hypothesis posits that agents will become deeply personalised and proactive partners. We are witnessing the emergence of a new class of agent: the proactive partner. By learning from your unique patterns and goals, these systems are beginning to shift from just following orders to anticipating your needs. AI systems operate as agents when they move beyond simply responding to chats or instructions. They initiate and execute tasks on behalf of the user, actively collaborating in the process. This moves beyond simple task execution into the realm of proactive goal discovery.
 
-### Table 3-1 Ulvac Results for 2008–2010, as Reported
+For instance, if you're exploring sustainable energy, the agent might identify your latent goal and proactively support it by suggesting courses or summarizing research. While these systems are still developing, their trajectory is clear. They will become increasingly proactive, learning to take initiative on your behalf when highly confident that the action will be helpful. Ultimately, the agent becomes an indispensable ally, helping you discover and achieve ambitions you have yet to fully articulate.
 
-*Shows the reported financial results for Ulvac, which appeared to show a turnaround in 2010 that was actually driven by a change in revenue recognition policy.*
+6
 
+---
 
-| (Yen million) | FY 2008 | FY 2009 | Percent Change | FY 2009 | FY 2010 | Percent Change |
-| --- | --- | --- | --- | --- | --- | --- |
-| Sales | 241,212 | 223,825 | −7% | 223,825 | 221,804 | −1% |
-| Operating profit | 9,081 | 3,483 | −62% | 3,483 | 4,809 | 38% |
+### Fig. 4: Five hypotheses about the future of agents
 
-### Table 3-2 Ulvac Results for 2009–2010, Results Assuming No Change in Accounting Policy
+*(Pyramid diagram of hypotheses)*
+*   **Hypothesis 5:** The Goal-Driven, Metamorphic Multi-Agent System
+*   **Hypothesis 4:** The Agent-Driven Economy
+*   **Hypothesis 3:** Embodiment and Physical World Interaction
+*   **Hypothesis 2:** Deep Personalization and Proactive Goal Discovery
+*   **Hypothesis 1:** The Emergence of the Generalist Agent
 
-*Shows the adjusted results for Ulvac, revealing that without the accounting change, sales would have plummeted 21% instead of declining only 1%.*
+### Hypothesis 3: Embodiment and Physical World Interaction
 
+This hypothesis foresees agents breaking free from their purely digital confines to operate in the physical world. By integrating agentic AI with robotics, we will see the rise of "embodied agents." Instead of just booking a handyman, you might ask your home agent to fix a leaky tap. The agent would use its vision sensors to perceive the problem, access a library of plumbing knowledge to formulate a plan, and then control its robotic manipulators with precision to perform the repair. This would represent a monumental step, bridging the gap between digital intelligence and physical action, and transforming everything from manufacturing and logistics to elder care and home maintenance.
 
-| (Yen million) | As Reported, Jun-09 | As Reported, Jun-10 | Accounting Adjustment | As Adjusted, Jun-10 | Adjusted Percent Change |
-| --- | --- | --- | --- | --- | --- |
-| Sales | 223,825 | 221,804 | (44,037) | 177,767 | −21% |
-| Operating profit | 3,483 | 4,809 | (12,033) | (7,224) | NM |
+### Hypothesis 4: The Agent-Driven Economy
 
-### Table 3-3 Trex’s Extended Payment Terms Cause Receivables to Jump
+The fourth hypothesis is that highly autonomous agents will become active participants in the economy, creating new markets and business models. We could see agents acting as independent economic entities, tasked with maximising a specific outcome, such as profit. An entrepreneur could launch an agent to run an entire e-commerce business. The agent would identify trending products by analysing social media, generate marketing copy and visuals, manage supply chain logistics by interacting with other automated systems, and dynamically adjust pricing based on real-time demand. This shift would create a new, hyper-efficient "agent economy" operating at a speed and scale impossible for humans to manage directly.
 
-*Demonstrates the impact of Trex Company's 'early buy program' and extended payment terms on its accounts receivable and Days Sales Outstanding (DSO).*
+### Hypothesis 5: The Goal-Driven, Metamorphic Multi-Agent System
 
+This hypothesis posits the emergence of intelligent systems that operate not from explicit programming, but from a declared goal. The user simply states the desired outcome, and the system autonomously figures out how to achieve it. This marks a fundamental shift towards metamorphic multi-agent systems capable of true self-improvement at both the individual and collective levels.
 
-| ($ millions, except days) | Q1, 3/03 | Q1, 3/04 | Q1, 3/05 | Q2, 6/03 | Q2, 6/04 | Q3, 9/03 | Q3, 9/04 | Q4, 12/03 | Q4, 12/04 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Accounts receivable | 13.9 | 31.9 | 68.8 | 21.9 | 31.2 | 13.1 | 12.8 | 5.8 | 22.0 |
-| Revenue | 68.7 | 76.3 | 89.9 | 59.2 | 83.4 | 41.2 | 64.4 | 21.9 | 29.6 |
-| DSO | 18 | 38 | 70 | 34 | 34 | 29 | 18 | 24 | 68 |
+This system would be a dynamic entity, not a single agent. It would have the ability to analyze its own performance and modify the topology of its multi-agent workforce, creating, duplicating, or removing agents as needed to form the most effective team for the task at hand. This evolution happens at multiple levels:
 
+*   **Architectural Modification:** At the deepest level, individual agents can rewrite their own source code and re-architect their internal structures for higher efficiency, as in the original hypothesis.
+*   **Instructional Modification:** At a higher level, the system continuously performs automatic prompt engineering and context engineering. It refines the instructions and information given to each agent, ensuring they are operating with optimal guidance without any human intervention.
 
-## Figures and Images
+For instance, an entrepreneur would simply declare the intent: "Launch a successful e-commerce business selling artisanal coffee." The system, without further programming, would spring into action. It might initially spawn a "Market Research" agent and a "Branding" agent. Based on the initial findings, it could decide to remove the branding agent and spawn three new specialized agents: a "Logo Design" agent, a "Webstore Platform" agent, and a "Supply Chain" agent. It would constantly tune their internal prompts for better performance. If the webstore agent becomes a bottleneck, the system might duplicate it into three parallel agents to work on different parts of the site, effectively re-architecting its own structure on the fly to best achieve the declared goal.
 
-### Table 3-1
-**Ulvac Results for 2008–2010, as Reported**
+8
 
-*Description:* A financial table showing Sales and Operating Profit for Ulvac across three fiscal years. It shows a sharp decline in 2009 followed by a reported recovery in 2010.
+---
 
-*Context:* Used to illustrate how a company can hide a collapsing business by changing its revenue recognition policy.
+## Conclusion
 
-*Alt-text:* Table showing Ulvac's reported sales and operating profit from 2008 to 2010.
+In essence, an AI agent represents a significant leap from traditional models, functioning as an autonomous system that perceives, plans, and acts to achieve specific goals. The evolution of this technology is advancing from single, tool-using agents to complex, collaborative multi-agent systems that tackle multifaceted objectives. Future hypotheses predict the emergence of generalist, personalized, and even physically embodied agents that will become active participants in the economy. This ongoing development signals a major paradigm shift towards self-improving, goal-driven systems poised to automate entire workflows and fundamentally redefine our relationship with technology.
 
-### Table 3-2
-**Ulvac Results for 2009–2010, Results Assuming No Change in Accounting Policy**
+## References
 
-*Description:* A financial table comparing reported 2010 results with adjusted results that remove the impact of the accounting change. It shows a massive negative adjustment to both sales and profit.
+1.  Cloudera, Inc. (April 2025), 96% of enterprises are increasing their use of AI agents. [https://www.cloudera.com/about/news-and-blogs/press-releases/2025-04-16-96-percent-of-enterprises-are-expanding-use-of-ai-agents-according-to-latest-data-from-cloudera.html](https://www.cloudera.com/about/news-and-blogs/press-releases/2025-04-16-96-percent-of-enterprises-are-expanding-use-of-ai-agents-according-to-latest-data-from-cloudera.html)
+2.  Autonomous generative AI agents: [https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2025/autonomous-generative-ai-agents-still-under-development.html](https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2025/autonomous-generative-ai-agents-still-under-development.html)
+3.  Market.us. Global Agentic AI Market Size, Trends and Forecast 2025–2034. [https://market.us/report/agentic-ai-market/](https://market.us/report/agentic-ai-market/)
 
-*Context:* Provides the 'sobering and shocking' reality of Ulvac's performance when the accounting manipulation is removed.
+9
 
-*Alt-text:* Table showing Ulvac's adjusted sales and operating profit for 2010.
+---
 
-### Table 3-3
-**Trex’s Extended Payment Terms Cause Receivables to Jump**
+# Glossary of Key Terms
+*(Note: The full glossary is located on page 406 of the complete book. Below are terms defined within this excerpt.)*
 
-*Description:* A multi-column table tracking Accounts Receivable, Revenue, and DSO for Trex Company over nine quarters. It highlights a massive spike in DSO in Q1 2005 and Q4 2004.
-
-*Context:* Illustrates the warning signs of extended payment terms and their effect on receivables and DSO.
-
-*Alt-text:* Table tracking Trex Company's receivables, revenue, and DSO from 2003 to 2005.
+*   **Agentic System:** A computational entity designed to perceive its environment, make informed decisions based on goals, and execute actions autonomously.
+*   **Context Engineering:** The strategic process of selecting, packaging, and managing the most relevant information to provide a focused context for an AI model.
+*   **Embodied Agent:** An AI agent integrated with physical robotics, allowing it to interact with and perform tasks in the physical world.
+*   **Metamorphic Multi-Agent System:** A dynamic system capable of modifying its own architecture, topology, and agent workforce to achieve a declared goal.
+*   **RAG (Retrieval-Augmented Generation):** A technique that enhances AI reliability by grounding models on factual information retrieved from external data sources.
